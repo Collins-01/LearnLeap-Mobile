@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 //   fontSize: 35,
 //   fontWeight: FontWeight.w600,
 // );
-TextStyle headingStyle1Bold = GoogleFonts.poppins(
+TextStyle headingStyle1Bold = GoogleFonts.montserrat(
   fontSize: 32,
   fontWeight: FontWeight.w600,
 );
