@@ -9,6 +9,8 @@ import 'viewmodels/signup_viewmodel.dart';
 class SignUpView extends ConsumerWidget {
   SignUpView({super.key});
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final NavigationService _navigationService = NavigationService.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -40,6 +42,18 @@ class SignUpView extends ConsumerWidget {
                               "Sign up to access all the features and resources available to you."),
                           const SizedBox(
                             height: 60,
+                          ),
+                          AppTextField(
+                            title: "FirstName",
+                            controller: firstNameController,
+                            hintText: "Collins",
+                            validator: (value) => FieldValidators.string(value),
+                          ),
+                          AppTextField(
+                            title: "LastName",
+                            controller: lastNameController,
+                            hintText: "Oriakhi",
+                            validator: (value) => FieldValidators.string(value),
                           ),
                           AppTextField(
                             title: "Email",
