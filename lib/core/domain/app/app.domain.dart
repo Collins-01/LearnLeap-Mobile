@@ -5,8 +5,10 @@ import 'package:learn_leap/core/domain/app/app.domain.interface.dart';
 class AppDomainImpl extends IAppDomain {
   @override
   Future<void> init({VoidCallback? onSuccess, VoidCallback? onFailure}) async {
+    await Future.delayed(const Duration(seconds: 2));
     //* Check if it's first time
     // * Check if user exists on the device
+    onSuccess?.call();
   }
 }
 

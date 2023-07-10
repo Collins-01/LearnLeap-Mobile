@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learn_leap/navigations/navigations.dart';
 import 'package:learn_leap/views/splash_screen.dart';
 
 void main() {
@@ -19,6 +20,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SplashScreenView(),
+      navigatorKey: NavigationService.instance.navigatorKey,
+      onGenerateRoute: RouteGenerators.generateRoutes,
     );
   }
 }
