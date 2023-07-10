@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:harmony_social/core/data/network_service/exceptions/failure.dart';
+import 'package:learn_leap/core/data/network/failure.dart';
 
-class BadResponseException extends DioException with Failure {
+import 'get_error.dart';
+
+class BadResponseException extends DioException implements Failure {
   final RequestOptions request;
   final Response? serverResponse;
   final String errorKey;
@@ -20,7 +22,7 @@ class BadResponseException extends DioException with Failure {
   }
 
   @override
-  String toString() {
-    return "Error was:\nTitle: $title\nMessage: $message ";
+  String getErrorInfo(error, [String key = '']) {
+    return getErrorInfoFromResponse(error);
   }
 }

@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 import '../failure.dart';
+import 'get_error.dart';
 
 ///Time Out Exception [When there is a connection timeou with the request]
-class DeadlineExceededException extends DioException with Failure {
+class DeadlineExceededException extends DioException implements Failure {
   DeadlineExceededException(RequestOptions r) : super(requestOptions: r);
 
   @override
@@ -15,4 +16,8 @@ class DeadlineExceededException extends DioException with Failure {
 
   @override
   String get title => "Network error";
+  @override
+  String getErrorInfo(error, [String key = '']) {
+    return getErrorInfoFromResponse(error);
+  }
 }

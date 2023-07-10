@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 
 import '../failure.dart';
+import 'get_error.dart';
 
 ///No Internet Connection
-class NoInternetConnectionException extends DioException with Failure {
+class NoInternetConnectionException extends DioException implements Failure {
   NoInternetConnectionException(RequestOptions r) : super(requestOptions: r);
 
   @override
@@ -16,4 +17,9 @@ class NoInternetConnectionException extends DioException with Failure {
 
   @override
   String get title => "No Network";
+
+  @override
+  String getErrorInfo(error, [String key = '']) {
+    return getErrorInfoFromResponse(error);
+  }
 }

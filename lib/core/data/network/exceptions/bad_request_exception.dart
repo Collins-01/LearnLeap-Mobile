@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
-
-import '../failure.dart';
+import 'package:learn_leap/core/data/network/exceptions/get_error.dart';
+import 'package:learn_leap/core/data/network/failure.dart';
 
 const _unkownErrorString = "An error occured, please try again. ";
 
-class BadRequestException extends DioException with Failure {
+class BadRequestException extends DioException implements Failure {
   final RequestOptions request;
   final Response? serverResponse;
   final String errorKey;
+
   BadRequestException(this.request, [this.serverResponse, this.errorKey = ''])
       : super(requestOptions: request, response: serverResponse);
 
@@ -23,7 +24,7 @@ class BadRequestException extends DioException with Failure {
   }
 
   @override
-  String toString() {
-    return "Error was:\nTitle: $title\nMessage: $message ";
+  String getErrorInfo(error, [String key = '']) {
+    return getErrorInfoFromResponse(error);
   }
 }

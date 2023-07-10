@@ -2,9 +2,11 @@ import '../failure.dart';
 
 import 'package:dio/dio.dart';
 
+import 'get_error.dart';
+
 const _unkownErrorString = "An error occured, please try again. ";
 
-class ConflictException extends DioException with Failure {
+class ConflictException extends DioException implements Failure {
   final RequestOptions request;
   final Response? serverResponse;
   final String errorKey;
@@ -27,4 +29,9 @@ class ConflictException extends DioException with Failure {
 
   @override
   String get title => "Conflict Error";
+
+  @override
+  String getErrorInfo(error, [String key = '']) {
+    return getErrorInfoFromResponse(error);
+  }
 }

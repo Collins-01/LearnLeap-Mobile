@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 
 import '../failure.dart';
+import 'get_error.dart';
 
-class InternalServerErrorException extends DioException with Failure {
+class InternalServerErrorException extends DioException implements Failure {
   final RequestOptions request;
   final Response? serverResponse;
   InternalServerErrorException(this.request, [this.serverResponse])
@@ -17,4 +18,9 @@ class InternalServerErrorException extends DioException with Failure {
   String get title => "Server Error";
   @override
   String get message => "An Unknown error occcured, please try again later";
+
+  @override
+  String getErrorInfo(error, [String key = '']) {
+    return getErrorInfoFromResponse(error);
+  }
 }

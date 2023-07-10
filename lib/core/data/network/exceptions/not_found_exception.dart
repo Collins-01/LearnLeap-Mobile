@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 
 import '../failure.dart';
+import 'get_error.dart';
 
 const _unkownErrorString = "An error occured, please try again. ";
 
 ///404
-class NotFoundException extends DioException with Failure {
+class NotFoundException extends DioException implements Failure {
   final RequestOptions request;
   final Response? serverResponse;
   final String errorKey;
@@ -29,5 +30,10 @@ class NotFoundException extends DioException with Failure {
   @override
   String get title {
     return "Not Found";
+  }
+
+  @override
+  String getErrorInfo(error, [String key = '']) {
+    return getErrorInfoFromResponse(error);
   }
 }

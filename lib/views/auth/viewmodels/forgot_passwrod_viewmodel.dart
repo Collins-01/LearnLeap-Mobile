@@ -3,12 +3,14 @@ import 'package:learn_leap/navigations/navigations.dart';
 import 'package:learn_leap/views/view_states/view_states.dart';
 import 'package:learn_leap/views/widgets/widgets.dart';
 
+import '../../../core/data/network/exceptions/exceptions.dart';
 import '../../../core/data/network/network.dart';
 import '../../../core/data/remote/auth/auth.dart';
 
 class ForgotPasswordViewModel extends BaseViewModel {
-  AuthRepository _authRepository;
+  final AuthRepository _authRepository;
   final NavigationService _navigationService = NavigationService.instance;
+  ForgotPasswordViewModel(this._authRepository);
 
   forgotPassword(String email) async {
     try {
@@ -32,11 +34,11 @@ class ForgotPasswordViewModel extends BaseViewModel {
   }
 
   cancelRequest() {
-    _authRepository.cancelRequest();
+    // _authRepository.cancelRequest();
   }
 }
 
 final forgotPasswordViewModel =
     ChangeNotifierProvider.autoDispose<ForgotPasswordViewModel>((ref) {
-  return ForgotPasswordViewModel();
+  return ForgotPasswordViewModel(ref.read(authRepository));
 });

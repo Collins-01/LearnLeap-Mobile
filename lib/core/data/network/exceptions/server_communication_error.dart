@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 import '../failure.dart';
+import 'get_error.dart';
 
 /// errors sent back by the server in json
-class ServerCommunicationException extends DioException with Failure {
+class ServerCommunicationException extends DioException implements Failure {
   ServerCommunicationException(this.r)
       : super(requestOptions: r!.requestOptions);
 
@@ -21,4 +22,9 @@ class ServerCommunicationException extends DioException with Failure {
 
   @override
   String get title => "Server Error ";
+
+  @override
+  String getErrorInfo(error, [String key = '']) {
+    return getErrorInfoFromResponse(error);
+  }
 }

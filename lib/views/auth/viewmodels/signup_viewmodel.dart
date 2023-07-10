@@ -7,7 +7,8 @@ import '../../../core/data/network/network.dart';
 import '../../../core/data/remote/auth/auth.dart';
 
 class SignUpViewModel extends BaseViewModel {
-  late final AuthRepository _authRepository;
+  final AuthRepository _authRepository;
+  SignUpViewModel(this._authRepository);
   final NavigationService _navigationService = NavigationService.instance;
 
   signUp(String email, String password) async {
@@ -38,5 +39,7 @@ class SignUpViewModel extends BaseViewModel {
 
 final signUpViewModel =
     ChangeNotifierProvider.autoDispose<SignUpViewModel>((ref) {
-  return SignUpViewModel();
+  return SignUpViewModel(
+    ref.read(authRepository),
+  );
 });

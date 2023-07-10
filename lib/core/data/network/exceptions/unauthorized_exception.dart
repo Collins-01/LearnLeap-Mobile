@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 import '../failure.dart';
+import 'get_error.dart';
 
 const _unkownErrorString = "An error occured, please try again. ";
 
 ///401
-class UnAuthorizedException extends DioException with Failure {
+class UnAuthorizedException extends DioException implements Failure {
   final RequestOptions request;
   final Response? serverResponse;
   final String errorKey;
@@ -27,4 +28,9 @@ class UnAuthorizedException extends DioException with Failure {
 
   @override
   String get title => "Access denied.";
+
+  @override
+  String getErrorInfo(error, [String key = '']) {
+    return getErrorInfoFromResponse(error);
+  }
 }
