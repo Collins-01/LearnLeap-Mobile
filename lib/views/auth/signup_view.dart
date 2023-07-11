@@ -18,8 +18,8 @@ class SignUpView extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final vm = ref.watch(signUpViewModel);
     return LoaderPage(
-      // busy: vm.isBusy,
-      busy: false,
+      busy: vm.isBusy,
+      // busy: false,
       cancelRequest: () => vm.cancelRequest(),
       child: Scaffold(
         backgroundColor: Colors.white,

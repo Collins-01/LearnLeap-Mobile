@@ -48,16 +48,7 @@ class OtpView extends ConsumerWidget {
                         },
                         //runs when every textfield is filled
                         onSubmit: (String verificationCode) {
-                          vm.verifyOtp(verificationCode);
-                          // showDialog(
-                          //     context: context,
-                          //     builder: (context) {
-                          //       return AlertDialog(
-                          //         title: const Text("Verification Code"),
-                          //         content:
-                          //             Text('Code entered is $verificationCode'),
-                          //       );
-                          //     });
+                          vm.verifyOtp(verificationCode, email);
                         }, // end onSubmit
                       ),
                     ],
