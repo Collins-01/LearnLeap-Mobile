@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:learn_leap/utils/utils.dart';
 
-import 'app_text.dart';
-
 class LoaderPage extends StatelessWidget {
   final Widget child;
   final VoidCallback? cancelRequest;
@@ -28,23 +26,14 @@ class LoaderPage extends StatelessWidget {
             child: child,
           ),
           busy
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      color: Colors.black.withOpacity(0.75),
-                      child: SpinKitDoubleBounce(
-                        color: AppColors.primaryColor,
-                        size: 180,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: cancelRequest,
-                      child: AppText.heading6("CANCEL"),
-                    )
-                  ],
+              ? Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  color: Colors.black.withOpacity(0.75),
+                  child: SpinKitDoubleBounce(
+                    color: AppColors.primaryColor,
+                    size: 180,
+                  ),
                 )
               : const SizedBox()
         ],

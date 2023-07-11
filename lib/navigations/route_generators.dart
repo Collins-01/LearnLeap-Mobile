@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_leap/views/splash_screen.dart';
+import 'package:learn_leap/views/views.dart';
 
-import '../views/auth/auth.dart';
 import 'navigation_routes.dart';
 
 class RouteGenerators {
@@ -23,10 +23,11 @@ class RouteGenerators {
         return MaterialPageRoute(
           builder: (_) => LoginView(),
         );
-      // case NavigationRoutes.checkEmailView:
-      //   return MaterialPageRoute(
-      //     builder: (_) => CheckEmailView(),
-      //   );
+      case NavigationRoutes.otpView:
+        final email = routeSettings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => OtpView(email: email),
+        );
 
       case NavigationRoutes.resetPasswordView:
         return MaterialPageRoute(
@@ -54,10 +55,10 @@ class RouteGenerators {
       //       images: [],
       //     ),
       //   );
-      // case NavigationRoutes.baseView:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BaseView(),
-      //   );
+      case NavigationRoutes.baseView:
+        return MaterialPageRoute(
+          builder: (_) => BaseView(),
+        );
       // case NavigationRoutes.notificationsView:
       //   return MaterialPageRoute(
       //     builder: (_) => const NotificationsView(),

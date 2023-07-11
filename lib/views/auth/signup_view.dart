@@ -81,7 +81,12 @@ class SignUpView extends ConsumerWidget {
                     if (!_formKey.currentState!.validate()) {
                       return;
                     }
-                    vm.signUp(emailController.text, passwordController.text);
+                    vm.signUp(
+                      emailController.text,
+                      passwordController.text,
+                      firstNameController.text,
+                      lastNameController.text,
+                    );
                   }),
                 ),
                 Positioned(

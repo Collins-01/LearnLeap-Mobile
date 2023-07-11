@@ -3,7 +3,7 @@ class NavigationRoutes {
   static const String resgisterView = "/register_view";
   static const String loginView = "/login_view";
   static const String splashScreenView = "/splash_screen_view";
-  static const String checkEmailView = "/check_email_view";
+  static const String otpView = "/otp_view";
   static const String resetPasswordView = "/reset_password_view";
   static const String uploadAvatarView = "/upload_avatar_view";
   static const String createBioView = "/create_bio_view";

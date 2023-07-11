@@ -11,12 +11,14 @@ class SignUpViewModel extends BaseViewModel {
   SignUpViewModel(this._authRepository);
   final NavigationService _navigationService = NavigationService.instance;
 
-  signUp(String email, String password) async {
+  signUp(
+      String email, String password, String firstName, String lastName) async {
     try {
       changeState(const ViewModelState.busy());
       // await _authRepository.signup(email, password);
       changeState(const ViewModelState.idle());
-      _navigationService.navigateToReplace(NavigationRoutes.checkEmailView);
+      _navigationService.navigateToReplace(NavigationRoutes.otpView,
+          arguments: email);
     } on Failure catch (e) {
       changeState(ViewModelState.error(e));
       AppFlushBar.showError(title: e.title, message: e.message);
