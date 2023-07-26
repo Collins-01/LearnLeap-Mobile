@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learn_leap/core/models/create_account_model.dart';
 import 'package:learn_leap/navigations/navigations.dart';
 import 'package:learn_leap/views/view_states/view_states.dart';
 import 'package:learn_leap/views/widgets/widgets.dart';
@@ -15,7 +16,14 @@ class SignUpViewModel extends BaseViewModel {
       String email, String password, String firstName, String lastName) async {
     try {
       changeState(const ViewModelState.busy());
-      // await _authRepository.signup(email, password);
+      await _authRepository.signup(
+        CreateAccount(
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+            role: ''),
+      );
       changeState(const ViewModelState.idle());
       _navigationService.navigateToReplace(NavigationRoutes.otpView,
           arguments: email);

@@ -8,14 +8,13 @@ class CreateAccount {
   final String email;
   final String password;
   final String role;
-  final File avatar;
+
   CreateAccount({
     required this.firstName,
     required this.lastName,
     required this.email,
     required this.password,
     required this.role,
-    required this.avatar,
   });
 
   CreateAccount copyWith({
@@ -32,7 +31,6 @@ class CreateAccount {
       email: email ?? this.email,
       password: password ?? this.password,
       role: role ?? this.role,
-      avatar: avatar ?? this.avatar,
     );
   }
 
@@ -43,7 +41,6 @@ class CreateAccount {
       'email': email,
       'password': password,
       'role': role,
-      'avatar': avatar,
     };
   }
 

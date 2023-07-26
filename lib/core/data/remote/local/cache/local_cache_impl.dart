@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:learn_leap/core/models/models.dart';
 import 'package:learn_leap/utils/utils.dart';
@@ -107,3 +108,7 @@ class LocalCacheImpl implements LocalCache {
     );
   }
 }
+
+final localCache = Provider<LocalCache>((ref) {
+  return LocalCacheImpl();
+});
