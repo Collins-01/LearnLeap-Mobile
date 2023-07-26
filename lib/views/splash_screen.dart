@@ -18,7 +18,7 @@ class _SplashScreenViewState extends ConsumerState<SplashScreenView> {
     await ref.read(appDomain).init(
           onSuccess: () {
             NavigationService.instance
-                .navigateToReplace(NavigationRoutes.loginView);
+                .navigateToReplace(NavigationRoutes.onboardingView);
           },
           onFailure: () {},
         );
