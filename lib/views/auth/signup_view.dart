@@ -27,73 +27,78 @@ class SignUpView extends ConsumerWidget {
         resizeToAvoidBottomInset: false,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              SvgPicture.asset(
-                "assets/svg/signin3.svg",
-              ),
-              const SizedBox(height: 10),
-              AppTextField(
-                title: "FirstName",
-                controller: firstNameController,
-                hintText: "Collins",
-                validator: (value) => FieldValidators.string(value),
-              ),
-              AppTextField(
-                title: "LastName",
-                controller: lastNameController,
-                hintText: "Oriakhi",
-                validator: (value) => FieldValidators.string(value),
-              ),
-              AppTextField(
-                title: "Email",
-                controller: emailController,
-                hintText: "example@gmal.com",
-                validator: FieldValidators.email,
-              ),
-              AppTextField(
-                title: "Password",
-                controller: passwordController,
-                hintText: "********",
-                isPassword: false,
-                validator: FieldValidators.password,
-              ),
-              const SizedBox(height: 10),
-              Center(
-                child: InkWell(
-                  onTap: () {
-                    _navigationService
-                        .navigateToReplace(NavigationRoutes.loginView);
-                  },
-                  child: Text.rich(
-                    TextSpan(
-                      text: "Already have an account? ",
-                      style: body,
-                      children: [
-                        TextSpan(
-                          text: "Login",
-                          style: body.copyWith(
-                            color: AppColors.primaryColor,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SvgPicture.asset(
+                  "assets/svg/signin3.svg",
+                ),
+                const SizedBox(height: 10),
+                AppTextField(
+                  title: "FirstName",
+                  controller: firstNameController,
+                  hintText: "Collins",
+                  validator: (value) => FieldValidators.string(value),
+                ),
+                AppTextField(
+                  title: "LastName",
+                  controller: lastNameController,
+                  hintText: "Oriakhi",
+                  validator: (value) => FieldValidators.string(value),
+                ),
+                AppTextField(
+                  title: "Email",
+                  controller: emailController,
+                  hintText: "example@gmal.com",
+                  validator: FieldValidators.email,
+                ),
+                AppTextField(
+                  title: "Password",
+                  controller: passwordController,
+                  hintText: "********",
+                  isPassword: false,
+                  validator: FieldValidators.password,
+                ),
+                const SizedBox(height: 10),
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                      _navigationService
+                          .navigateToReplace(NavigationRoutes.loginView);
+                    },
+                    child: Text.rich(
+                      TextSpan(
+                        text: "Already have an account? ",
+                        style: body,
+                        children: [
+                          TextSpan(
+                            text: "Login",
+                            style: body.copyWith(
+                              color: AppColors.primaryColor,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 25),
-              AppButton.long("Sign Up", onTap: () {
-                if (!_formKey.currentState!.validate()) {
-                  return;
-                }
-                vm.signUp(
-                  emailController.text,
-                  passwordController.text,
-                  firstNameController.text,
-                  lastNameController.text,
-                );
-              })
-            ],
+                const SizedBox(height: 25),
+                AppButton.long("Sign Up", onTap: () {
+                  if (!_formKey.currentState!.validate()) {
+                    return;
+                  }
+                  vm.signUp(
+                    emailController.text,
+                    passwordController.text,
+                    firstNameController.text,
+                    lastNameController.text,
+                  );
+                }),
+                SizedBox(
+                  height: SizingConfig.defaultPadding * 2,
+                )
+              ],
+            ),
           ),
         ),
       ),
