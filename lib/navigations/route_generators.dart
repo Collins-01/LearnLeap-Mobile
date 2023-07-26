@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:learn_leap/views/auth/onboarding_view.dart';
+import 'package:learn_leap/views/auth/pre_signup_view.dart';
 import 'package:learn_leap/views/splash_screen.dart';
 import 'package:learn_leap/views/views.dart';
 
@@ -18,6 +20,10 @@ class RouteGenerators {
       case NavigationRoutes.resgisterView:
         return MaterialPageRoute(
           builder: (_) => SignUpView(),
+        );
+      case NavigationRoutes.preRegisterView:
+        return MaterialPageRoute(
+          builder: (_) => const PreSignUpView(),
         );
       case NavigationRoutes.loginView:
         return MaterialPageRoute(
@@ -99,10 +105,10 @@ class RouteGenerators {
       //       firstName: firstName,
       //     ),
       //   );
-      // case NavigationRoutes.onboardingView:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const OnboardingView(),
-      //   );
+      case NavigationRoutes.onboardingView:
+        return MaterialPageRoute(
+          builder: (_) => const OnboardingView(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

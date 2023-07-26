@@ -1,5 +1,6 @@
 class NavigationRoutes {
   static const String forgotPasswordView = "/forgot_password_view";
+  static const String preRegisterView = "/pre_register_view ";
   static const String resgisterView = "/register_view";
   static const String loginView = "/login_view";
   static const String splashScreenView = "/splash_screen_view";
