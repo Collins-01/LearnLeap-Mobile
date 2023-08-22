@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learn_leap/core/domain/app/app.domain.dart';
-import 'package:learn_leap/navigations/navigation_routes.dart';
-import 'package:learn_leap/navigations/navigations_service.dart';
-import 'package:learn_leap/views/widgets/app_text.dart';
+
+import '../../core/core.dart';
 
 class SplashScreenView extends ConsumerStatefulWidget {
   const SplashScreenView({super.key});
@@ -18,7 +17,7 @@ class _SplashScreenViewState extends ConsumerState<SplashScreenView> {
     await ref.read(appDomain).init(
           onSuccess: () {
             NavigationService.instance
-                .navigateToReplace(NavigationRoutes.onboardingView);
+                .navigateToReplace(NavigatorRoutes.loginView);
           },
           onFailure: () {},
         );

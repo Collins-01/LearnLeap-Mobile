@@ -1,5 +1,5 @@
-import 'package:learn_leap/core/models/create_account_model.dart';
-import 'package:learn_leap/core/models/models.dart';
+import 'package:learn_leap/models/create_account_model.dart';
+import 'package:learn_leap/models/models.dart';
 
 abstract class AuthInterface {
   Future<LoginPayload> login(String username, String password);

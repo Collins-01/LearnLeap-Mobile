@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:learn_leap/navigations/navigations.dart';
-import 'package:learn_leap/utils/utils.dart';
-import 'package:learn_leap/views/widgets/widgets.dart';
-
+import 'package:learn_leap/widgets/widgets.dart';
 import 'viewmodels/signup_viewmodel.dart';
+import '../../../core/core.dart';
 
 class SignUpView extends ConsumerWidget {
   SignUpView({super.key});
@@ -64,16 +62,16 @@ class SignUpView extends ConsumerWidget {
                   child: InkWell(
                     onTap: () {
                       _navigationService
-                          .navigateToReplace(NavigationRoutes.loginView);
+                          .navigateToReplace(NavigatorRoutes.loginView);
                     },
                     child: Text.rich(
                       TextSpan(
                         text: "Already have an account? ",
-                        style: body,
+                        style: mediumStyle,
                         children: [
                           TextSpan(
                             text: "Login",
-                            style: body.copyWith(
+                            style: mediumStyle.copyWith(
                               color: AppColors.primaryColor,
                             ),
                           ),

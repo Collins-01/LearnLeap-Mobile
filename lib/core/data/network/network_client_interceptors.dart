@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:learn_leap/utils/utils.dart';
+import 'package:learn_leap/core/utils/utils.dart';
 
 import 'exceptions/exceptions.dart';
 import 'failure.dart';

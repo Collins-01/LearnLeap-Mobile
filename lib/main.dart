@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:learn_leap/navigations/navigations.dart';
-import 'package:learn_leap/views/splash_screen.dart';
+import 'package:learn_leap/views/onboarding/splash_screen.dart';
+
+import 'core/core.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const SplashScreenView(),
       navigatorKey: NavigationService.instance.navigatorKey,
-      onGenerateRoute: RouteGenerators.generateRoutes,
+      onGenerateRoute: AppRouter.generateRoute,
     );
   }
 }

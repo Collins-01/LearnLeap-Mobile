@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_leap/extensions/extensions.dart';
-import 'package:learn_leap/utils/utils.dart';
+import 'package:learn_leap/core/utils/utils.dart';
 
-import 'app_text.dart';
 
 class AppButton extends StatelessWidget {
   final String title;

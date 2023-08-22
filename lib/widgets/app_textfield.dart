@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../utils/utils.dart';
+import '../core/constants/constants.dart';
+import '../core/utils/utils.dart';
 
 class AppTextField extends StatefulWidget {
   final String title;
@@ -44,7 +45,7 @@ class _AppTextFieldState extends State<AppTextField> {
         textInputAction: widget.textInputAction,
         // inputFormatters: widget.inputFormatters,
         controller: widget.controller,
-        style: body,
+        style: mediumStyle,
         validator: widget.validator,
         obscureText: (widget.isPassword && obscure),
         decoration: InputDecoration(
@@ -53,7 +54,7 @@ class _AppTextFieldState extends State<AppTextField> {
           fillColor: AppColors.textFieldColor,
           border: const OutlineInputBorder(),
           hintText: widget.hintText,
-          hintStyle: body,
+          hintStyle: mediumStyle,
           // prefixIcon: widget.prefixIcon,
           suffixIcon: widget.isPassword
               ? IconButton(

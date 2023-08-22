@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learn_leap/core/data/remote/auth/auth.interface.dart';
 import 'package:learn_leap/core/data/remote/local/local.dart';
-import 'package:learn_leap/core/models/create_account_model.dart';
-import 'package:learn_leap/core/models/login_payload.dart';
+import 'package:learn_leap/models/create_account_model.dart';
+import 'package:learn_leap/models/login_payload.dart';
 
 import 'auth.service.dart';
 

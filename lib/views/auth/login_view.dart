@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:learn_leap/utils/utils.dart';
-import 'package:learn_leap/views/widgets/widgets.dart';
+import 'package:learn_leap/widgets/widgets.dart';
 
-import '../../navigations/navigations.dart';
+import '../../../core/core.dart';
 import 'viewmodels/login_viewmodel.dart';
 
 class LoginView extends ConsumerWidget {
@@ -47,7 +46,7 @@ class LoginView extends ConsumerWidget {
                   isPassword: false,
                   validator: FieldValidators.password,
                 ),
-                AppText.body(
+                AppText.medium(
                   "Forgot password?",
                   color: const Color(0xFF92929F),
                 ),
@@ -68,7 +67,7 @@ class LoginView extends ConsumerWidget {
                       children: [
                         SvgPicture.asset("assets/svg/google.svg"),
                         const SizedBox(width: 16),
-                        AppText.body(
+                        AppText.medium(
                           "Login with Google",
                           color: Colors.black,
                         ),
@@ -81,18 +80,18 @@ class LoginView extends ConsumerWidget {
                   child: InkWell(
                     onTap: () {
                       _navigationService
-                          .navigateTo(NavigationRoutes.preRegisterView);
+                          .navigateTo(NavigatorRoutes.preSignUpView);
                     },
                     child: Text.rich(
                       TextSpan(
                         text: "Don't have an account? ",
-                        style: body.copyWith(
+                        style: mediumStyle.copyWith(
                           color: Colors.black,
                         ),
                         children: [
                           TextSpan(
                             text: "Sign up",
-                            style: body.copyWith(
+                            style: mediumStyle.copyWith(
                               color: AppColors.primaryColor,
                             ),
                           ),

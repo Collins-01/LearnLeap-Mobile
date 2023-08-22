@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:learn_leap/utils/utils.dart';
-import 'package:learn_leap/views/widgets/widgets.dart';
+import 'package:learn_leap/core/utils/utils.dart';
+import 'package:learn_leap/widgets/widgets.dart';
 
 class ResetPasswordView extends StatelessWidget {
   ResetPasswordView({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:learn_leap/navigations/navigations.dart';
 import 'package:learn_leap/views/view_states/view_states.dart';
-import 'package:learn_leap/views/widgets/widgets.dart';
+import 'package:learn_leap/widgets/widgets.dart';
 
+import '../../../core/core.dart';
 import '../../../core/data/network/network.dart';
 import '../../../core/data/remote/auth/auth.dart';
 

@@ -1,11 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:learn_leap/core/models/create_account_model.dart';
-import 'package:learn_leap/navigations/navigations.dart';
+import 'package:learn_leap/core/router/router_argument_keys.dart';
+import 'package:learn_leap/models/create_account_model.dart';
 import 'package:learn_leap/views/view_states/view_states.dart';
-import 'package:learn_leap/views/widgets/widgets.dart';
+import 'package:learn_leap/widgets/widgets.dart';
 
 import '../../../core/data/network/network.dart';
 import '../../../core/data/remote/auth/auth.dart';
+import '../../../core/core.dart';
 
 class SignUpViewModel extends BaseViewModel {
   final AuthRepository _authRepository;
@@ -25,8 +26,8 @@ class SignUpViewModel extends BaseViewModel {
             role: ''),
       );
       changeState(const ViewModelState.idle());
-      _navigationService.navigateToReplace(NavigationRoutes.otpView,
-          arguments: email);
+      _navigationService.navigateToReplace(NavigatorRoutes.otpVerificationView,
+          argument: {RoutingArgumentKey.email: email});
     } on Failure catch (e) {
       changeState(ViewModelState.error(e));
       AppFlushBar.showError(title: e.title, message: e.message);

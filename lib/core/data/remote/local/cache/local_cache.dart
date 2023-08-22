@@ -1,4 +1,4 @@
-import 'package:learn_leap/core/models/models.dart';
+import 'package:learn_leap/models/models.dart';
 
 abstract class LocalCache {
   ///Retrieves access token for authorizing requests
