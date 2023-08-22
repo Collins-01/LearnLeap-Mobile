@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:learn_leap/utils/utils.dart';
+import 'package:learn_leap/core/utils/utils.dart';
 import 'package:learn_leap/views/auth/viewmodels/forgot_passwrod_viewmodel.dart';
 
-import '../widgets/widgets.dart';
+import '../../widgets/widgets.dart';
 
 class ForgotPasswordView extends ConsumerWidget {
   ForgotPasswordView({Key? key}) : super(key: key);

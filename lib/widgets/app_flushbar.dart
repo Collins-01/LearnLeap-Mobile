@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flushbar/flutter_flushbar.dart';
-import '../../navigations/navigations.dart';
+
+import '../core/core.dart';
 
 class AppFlushBar {
   static final NavigationService _navigationService =

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:learn_leap/navigations/navigation_routes.dart';
-import 'package:learn_leap/navigations/navigations_service.dart';
-import 'package:learn_leap/views/widgets/app_button.dart';
+import 'package:learn_leap/widgets/app_button.dart';
+import '../../../core/core.dart';
 
 class PreSignUpView extends StatelessWidget {
   const PreSignUpView({super.key});
@@ -21,12 +20,12 @@ class PreSignUpView extends StatelessWidget {
               const Spacer(),
               AppButton.long("Sign up as a Tutor", onTap: () {
                 NavigationService.instance
-                    .navigateToReplace(NavigationRoutes.resgisterView);
+                    .navigateToReplace(NavigatorRoutes.signUpView);
               }),
               const SizedBox(height: 25),
               AppButton.long("Sign up as a Student", onTap: () {
                 NavigationService.instance
-                    .navigateToReplace(NavigationRoutes.resgisterView);
+                    .navigateToReplace(NavigatorRoutes.signUpView);
               }),
             ],
           ),

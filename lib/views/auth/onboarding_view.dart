@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:learn_leap/navigations/navigation_routes.dart';
-import 'package:learn_leap/navigations/navigations_service.dart';
-import 'package:learn_leap/views/widgets/app_button.dart';
+import 'package:learn_leap/widgets/app_button.dart';
+import '../../../core/core.dart';
 
 class OnboardingView extends StatelessWidget {
   const OnboardingView({super.key});
@@ -21,7 +20,7 @@ class OnboardingView extends StatelessWidget {
               const Spacer(),
               AppButton.long("Get Started", onTap: () {
                 NavigationService.instance
-                    .navigateToReplace(NavigationRoutes.loginView);
+                    .navigateToReplace(NavigatorRoutes.loginView);
               }),
             ],
           ),

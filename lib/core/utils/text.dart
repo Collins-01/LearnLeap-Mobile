@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:learn_leap/utils/utils.dart';
+import 'package:learn_leap/core/constants/text_style.dart';
+import 'package:learn_leap/core/utils/utils.dart';
 
 class AppText extends StatelessWidget {
   final String text;
@@ -11,6 +12,7 @@ class AppText extends StatelessWidget {
   final bool centered;
   final int? maxLines;
   final double? fontSize;
+  final FontWeight? fontWeight;
   final double? letterSpacing;
   final double? wordSpacing;
   final double? lineHeight;
@@ -32,12 +34,13 @@ class AppText extends StatelessWidget {
     this.letterSpacing,
     this.lineHeight,
     this.wordSpacing,
-  })  : style = headingStyle1Bold.copyWith(color: color),
+    this.fontWeight,
+  })  : style = headingStyle1.copyWith(color: color),
         super(key: key);
 
   /// h2 text
   ///
-  // fontSize `29`
+  // fontSize `24`
   // fontWeight `700`
   AppText.heading2(
     this.text, {
@@ -52,12 +55,13 @@ class AppText extends StatelessWidget {
     this.letterSpacing,
     this.wordSpacing,
     this.lineHeight,
-  })  : style = headingStyle2Bold.copyWith(color: color),
+    this.fontWeight,
+  })  : style = headingStyle2.copyWith(color: color),
         super(key: key);
 
   /// h3 text
   ///
-  /// fontSize `26`
+  /// fontSize `20`
   /// fontWeight `700`
   AppText.heading3(this.text,
       {Key? key,
@@ -70,13 +74,14 @@ class AppText extends StatelessWidget {
       this.fontSize,
       this.wordSpacing,
       this.lineHeight,
-      this.letterSpacing})
-      : style = headingStyle3Bold.copyWith(color: color),
+      this.letterSpacing,
+      this.fontWeight})
+      : style = headingStyle3.copyWith(color: color),
         super(key: key);
 
   /// h4text
   //
-  // / fontSize `22`
+  // / fontSize `18`
   // / fontWeight `700`
   AppText.heading4(
     this.text, {
@@ -91,7 +96,8 @@ class AppText extends StatelessWidget {
     this.fontSize,
     this.letterSpacing,
     this.wordSpacing,
-  })  : style = headingStyle4Bold.copyWith(
+    this.fontWeight,
+  })  : style = headingStyle4.copyWith(
           color: color,
           fontSize: fontSize,
         ),
@@ -99,8 +105,8 @@ class AppText extends StatelessWidget {
 
   /// h5 text
   ///
-  /// fontSize `16`
-  /// fontWeight `500`
+  /// fontSize `14`
+  /// fontWeight `700`
   AppText.heading5(
     this.text, {
     Key? key,
@@ -114,13 +120,14 @@ class AppText extends StatelessWidget {
     this.letterSpacing,
     this.wordSpacing,
     this.lineHeight,
-  })  : style = headingStyle5Bold.copyWith(color: color),
+    this.fontWeight,
+  })  : style = headingStyle5.copyWith(color: color),
         super(key: key);
 
   /// h6 text
   ///
-  /// fontSize `14`
-  /// fontWeight `500`
+  /// fontSize `12`
+  /// fontWeight `700`
   AppText.heading6(
     this.text, {
     Key? key,
@@ -134,38 +141,97 @@ class AppText extends StatelessWidget {
     this.letterSpacing,
     this.wordSpacing,
     this.lineHeight,
-  })  : style = headingStyle6Bold.copyWith(color: color),
+    this.fontWeight,
+  })  : style = headingStyle6.copyWith(color: color),
         super(key: key);
 
-  /// normal body text
+  /// h6 text
   ///
-  /// fontSize `14`
+  /// fontSize `16`
   /// fontWeight `700`
-  // ignore: use_key_in_widget_constructors
-  AppText.body(
+  AppText.button(
     this.text, {
     Key? key,
     this.multiText = true,
     this.overflow = TextOverflow.ellipsis,
     this.color,
     this.maxLines,
-    double? height,
     this.centered = false,
-    this.lineHeight,
     this.textAlign,
     this.fontSize,
     this.letterSpacing,
     this.wordSpacing,
-  }) : style = body.copyWith(
-          color: color,
-          height: height,
-          fontSize: fontSize,
-        );
+    this.lineHeight,
+    this.fontWeight,
+  })  : style = buttonStyle.copyWith(color: color),
+        super(key: key);
+
+  /// normal body text
+  ///
+  /// fontSize `16`
+  AppText.regular(
+    this.text, {
+    Key? key,
+    this.multiText = true,
+    this.overflow = TextOverflow.ellipsis,
+    this.color,
+    this.maxLines,
+    this.centered = false,
+    this.textAlign,
+    this.fontSize,
+    this.letterSpacing,
+    this.wordSpacing,
+    this.lineHeight,
+    this.fontWeight,
+  })  : style = regularStyle.copyWith(
+            color: color, fontSize: fontSize, fontWeight: fontWeight),
+        super(key: key);
+
+  /// medium body text
+  ///
+  /// fontSize `14`
+  AppText.medium(
+    this.text, {
+    Key? key,
+    this.multiText = true,
+    this.overflow = TextOverflow.ellipsis,
+    this.color,
+    this.maxLines,
+    this.centered = false,
+    this.textAlign,
+    this.fontSize,
+    this.letterSpacing,
+    this.wordSpacing,
+    this.lineHeight,
+    this.fontWeight,
+  })  : style = mediumStyle.copyWith(
+            color: color, fontSize: fontSize, fontWeight: fontWeight),
+        super(key: key);
+
+  /// small text
+  ///
+  /// fontSize `12`
+  AppText.small(
+    this.text, {
+    Key? key,
+    this.multiText = true,
+    this.overflow = TextOverflow.ellipsis,
+    this.color,
+    this.maxLines,
+    this.centered = false,
+    this.textAlign,
+    this.fontSize,
+    this.letterSpacing,
+    this.wordSpacing,
+    this.lineHeight,
+    this.fontWeight,
+  })  : style = smallStyle.copyWith(
+            color: color, fontSize: fontSize, fontWeight: fontWeight),
+        super(key: key);
 
   /// semibold text
   ///
-  /// fontSize `11`
-  /// fontWeight `400`
+  /// fontSize `10`
   AppText.caption(
     this.text, {
     Key? key,
@@ -179,10 +245,9 @@ class AppText extends StatelessWidget {
     this.letterSpacing,
     this.wordSpacing,
     this.lineHeight,
-  })  : style = caption.copyWith(
-          color: color,
-          fontSize: fontSize,
-        ),
+    this.fontWeight,
+  })  : style = captionStyle.copyWith(
+            color: color, fontSize: fontSize, fontWeight: fontWeight),
         super(key: key);
 
   @override

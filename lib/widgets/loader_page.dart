@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:learn_leap/utils/utils.dart';
+import 'package:learn_leap/core/utils/utils.dart';
 
 class LoaderPage extends StatelessWidget {
   final Widget child;

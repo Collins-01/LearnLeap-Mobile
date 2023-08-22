@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:learn_leap/utils/utils.dart';
+import 'package:learn_leap/core/utils/utils.dart';
 
 import 'view_model_state.dart';
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:learn_leap/utils/utils.dart';
+import 'package:learn_leap/core/utils/utils.dart';
 import 'package:learn_leap/views/auth/viewmodels/otp_viewmodel.dart';
 
-import '../widgets/widgets.dart';
+import '../../widgets/widgets.dart';
 
 class OtpView extends ConsumerWidget {
   final String email;
