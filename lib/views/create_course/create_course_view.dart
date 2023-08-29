@@ -38,6 +38,75 @@ class CreateCourseView extends ConsumerWidget {
                   controller: _courseTypeController,
                   title: "Course Type",
                   hintText: "CSC",
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (_) => Container(
+                        height: context.getDeviceHeight,
+                        width: context.getDeviceWidth,
+                        decoration: BoxDecoration(
+                          color: AppColors.textFieldColor,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: 16,
+                            left: 16,
+                            right: 16,
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  AppText.heading5("Select Course Type"),
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(Icons.add),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Wrap(
+                                alignment: WrapAlignment.start,
+                                children: [
+                                  ...List.generate(
+                                    20,
+                                    (index) => Container(
+                                      height: 45,
+                                      width: 80,
+                                      margin: const EdgeInsets.only(right: 10),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 8,
+                                      ),
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.primaryColor
+                                            .withOpacity(.3),
+                                        borderRadius: const BorderRadius.all(
+                                          Radius.circular(12),
+                                        ),
+                                      ),
+                                      child: AppText.heading5("CSC"),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 CreateCourseTextField(
                   controller: _descriptionController,
