@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_leap/core/utils/utils.dart';
+import 'package:learn_leap/views/home/tutor_home_view.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import 'home.dart';
@@ -44,14 +45,15 @@ class BaseView extends StatelessWidget {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle:
-          NavBarStyle.style1, // Choose the nav bar style with this property.
+          NavBarStyle.style9, // Choose the nav bar style with this property.
     );
   }
 
   List<Widget> _buildScreens() {
     return [
+      const TutorsHomeView(),
       const HomeView(),
-      const HomeView(),
+      // const HomeView(),
       const HomeView(),
     ];
   }

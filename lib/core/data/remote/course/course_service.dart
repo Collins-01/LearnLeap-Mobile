@@ -1,4 +1,5 @@
 import 'package:faker/faker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learn_leap/core/data/remote/course/course.dart';
 import 'package:learn_leap/core/utils/utils.dart';
 import 'package:learn_leap/models/data_models/data_models.dart';
@@ -48,3 +49,7 @@ class CourseServiceImpl extends CourseService {
     return CoursesByTutorResponse(courses: courses);
   }
 }
+
+final courseServiceProvider = Provider<CourseService>((ref) {
+  return CourseServiceImpl();
+});
