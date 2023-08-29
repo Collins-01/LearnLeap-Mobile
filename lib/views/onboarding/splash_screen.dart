@@ -32,7 +32,7 @@ class _SplashScreenViewState extends ConsumerState<SplashScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: AppText.heading1("LearnLeap")),
+      body: Center(child: AppText.heading1("LearnLeap"),),
     );
   }
 }

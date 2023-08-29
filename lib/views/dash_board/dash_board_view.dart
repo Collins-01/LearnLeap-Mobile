@@ -2,12 +2,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_leap/core/utils/utils.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:learn_leap/views/student/profile/profile_view.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import 'home.dart';
+import '../student/home/home_view.dart';
 
-class BaseView extends StatelessWidget {
-  BaseView({Key? key}) : super(key: key);
+class DashBoardView extends StatelessWidget {
+  DashBoardView({Key? key}) : super(key: key);
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
 
@@ -53,6 +54,7 @@ class BaseView extends StatelessWidget {
       const HomeView(),
       const HomeView(),
       const HomeView(),
+      const ProfileView(),
     ];
   }
 
@@ -61,6 +63,12 @@ class BaseView extends StatelessWidget {
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.home),
         title: "Home",
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.class_outlined),
+        title: "Courses",
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),

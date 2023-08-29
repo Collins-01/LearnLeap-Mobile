@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:learn_leap/views/dash_board/dash_board_view.dart';
+import 'package:learn_leap/views/student/home/home_view.dart';
 
 import '../../views/views.dart';
 import '../core.dart';
@@ -23,10 +25,10 @@ class AppRouter {
           settings: settings,
           viewToShow: const HomeView(),
         );
-      case NavigatorRoutes.baseView:
+      case NavigatorRoutes.dashBoardView:
         return _getPageRoute(
           settings: settings,
-          viewToShow: BaseView(),
+          viewToShow: DashBoardView(),
         );
       case NavigatorRoutes.splashScreenView:
         return _getPageRoute(

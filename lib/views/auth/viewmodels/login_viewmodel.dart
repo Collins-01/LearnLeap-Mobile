@@ -16,7 +16,7 @@ class LoginViewModel extends BaseViewModel {
       changeState(const ViewModelState.busy());
       await _authRepository.login(email, password);
       changeState(const ViewModelState.idle());
-      _navigationService.navigateToReplace(NavigatorRoutes.homeView);
+      _navigationService.navigateToReplace(NavigatorRoutes.dashBoardView);
     } on Failure catch (e) {
       changeState(ViewModelState.error(e));
       AppFlushBar.showError(title: e.title, message: e.message);

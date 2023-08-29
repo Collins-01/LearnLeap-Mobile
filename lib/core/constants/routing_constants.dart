@@ -9,5 +9,5 @@ class NavigatorRoutes {
   static const String emailVerificationView = "/emailVerificationView";
   static const String resetPasswordView = "/resetPasswordView";
   static const String homeView = "/homeView";
-  static const String baseView = "/baseView";
+  static const String dashBoardView = "/dashBoardView";
 }
