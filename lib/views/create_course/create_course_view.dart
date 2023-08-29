@@ -47,7 +47,8 @@ class CreateCourseView extends ConsumerWidget {
                   isDescription: true,
                 ),
                 CreateCourseTextField(
-                  controller: _courseTypeController,
+                  controller: _priceController,
+                  keyboardType: TextInputType.number,
                   title: "Course Price (Optional)",
                   hintText: "50.00",
                 ),
@@ -61,71 +62,39 @@ class CreateCourseView extends ConsumerWidget {
                         onTap: () {
                           showModalBottomSheet(
                             context: context,
-                            builder: (_) => Container(
-                              height: 200,
-                              alignment: Alignment.center,
-                              width: context.getDeviceWidth,
-                              decoration: BoxDecoration(
-                                color: AppColors.textFieldColor,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: context.getDeviceWidth * 0.7,
-                                    height: 50,
-                                    child: ElevatedButton(
-                                      onPressed: () {},
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.red,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(12),
-                                          ),
-                                        ),
-                                      ),
-                                      child: AppText.regular(
-                                        "Record",
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  SizedBox(
-                                    width: context.getDeviceWidth * 0.7,
-                                    height: 50,
-                                    child: OutlinedButton(
-                                      style: OutlinedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          side: BorderSide(
-                                            color: AppColors.primaryColor,
-                                          ),
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(12),
-                                          ),
-                                        ),
-                                      ),
-                                      onPressed: () {},
-                                      child: AppText.regular(
-                                        "Gallery",
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
+                            builder: (_) => const CreateMediaButtomSheet(
+                              title1: "Record",
+                              title2: "Gallery",
                             ),
                           );
                         },
                       ),
-                      const MediaComponent(
+                      MediaComponent(
                         title: "Video",
                         icon: Icons.camera_alt_rounded,
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (_) => const CreateMediaButtomSheet(
+                              title1: "Record a Video",
+                              title2: "Gallery",
+                            ),
+                          );
+                        },
                       ),
-                      const MediaComponent(
+                      MediaComponent(
                         title: "Document",
                         icon: Icons.document_scanner,
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (_) => const CreateMediaButtomSheet(
+                              title1: "Pick a Document",
+                              isDocument: true,
+                              title2: "",
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -187,6 +156,80 @@ class MediaComponent extends StatelessWidget {
             height: 5,
           ),
           AppText.small(title)
+        ],
+      ),
+    );
+  }
+}
+
+class CreateMediaButtomSheet extends StatelessWidget {
+  final String title1;
+  final String title2;
+  final bool isDocument;
+  const CreateMediaButtomSheet({
+    Key? key,
+    required this.title1,
+    required this.title2,
+    this.isDocument = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      alignment: Alignment.center,
+      width: context.getDeviceWidth,
+      decoration: BoxDecoration(
+        color: AppColors.textFieldColor,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: context.getDeviceWidth * 0.7,
+            height: 50,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor:
+                    isDocument ? AppColors.primaryColor : Colors.red,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(12),
+                  ),
+                ),
+              ),
+              child: AppText.regular(
+                title1,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          isDocument
+              ? const SizedBox.shrink()
+              : SizedBox(
+                  width: context.getDeviceWidth * 0.7,
+                  height: 50,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: AppColors.primaryColor,
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: AppText.regular(
+                      title2,
+                    ),
+                  ),
+                )
         ],
       ),
     );
