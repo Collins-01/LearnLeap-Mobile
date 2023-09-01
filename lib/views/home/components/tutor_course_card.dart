@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:learn_leap/core/utils/utils.dart';
 import 'package:learn_leap/extensions/extensions.dart';
 import 'package:learn_leap/models/data_models/data_models.dart';
+import 'package:learn_leap/views/home/tutor_course_details_view.dart';
 import 'package:learn_leap/widgets/widgets.dart';
 
 class TutorCourseCard extends StatelessWidget {
@@ -16,7 +17,13 @@ class TutorCourseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => TutorCourseDetailsView(
+            course: course,
+          ),
+        ),
+      ),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
