@@ -48,6 +48,10 @@ class TutorCourseDetailsView extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
+            AppText.small(course.description),
+            const SizedBox(
+              height: 10,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Column(

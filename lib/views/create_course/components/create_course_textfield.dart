@@ -10,6 +10,7 @@ class CreateCourseTextField extends StatelessWidget {
   final String hintText;
   final bool isDescription;
   final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
 
   const CreateCourseTextField({
     Key? key,
@@ -19,6 +20,7 @@ class CreateCourseTextField extends StatelessWidget {
     this.onTap,
     this.keyboardType,
     required this.hintText,
+    this.validator,
     this.isDescription = false,
   }) : super(key: key);
 
@@ -37,13 +39,14 @@ class CreateCourseTextField extends StatelessWidget {
             height: 10,
           ),
           SizedBox(
-            height: isDescription ? null : 50,
+            // height: isDescription ? null : 50,
             child: TextFormField(
               keyboardType: keyboardType,
               // enabled: isCourseType,
               onTap: onTap,
               controller: controller,
               maxLines: isDescription ? 6 : null,
+              validator: validator,
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: mediumStyle,
