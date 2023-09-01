@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learn_leap/core/utils/utils.dart';
 import 'package:learn_leap/views/create_course/create_course_view.dart';
+import 'package:learn_leap/views/home/components/components.dart';
 import 'package:learn_leap/views/home/viewmodels/tutor_home_viewmodel.dart';
 
 class TutorsHomeView extends ConsumerStatefulWidget {
@@ -14,7 +15,9 @@ class TutorsHomeView extends ConsumerStatefulWidget {
 class _TutorsHomeViewState extends ConsumerState<TutorsHomeView> {
   @override
   void initState() {
-    ref.read(tutorHomeViewmodel).getAllCourses();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ref.read(tutorHomeViewmodel).getAllCourses();
+    });
     super.initState();
   }
 
@@ -58,9 +61,28 @@ class _TutorsHomeViewState extends ConsumerState<TutorsHomeView> {
               const SizedBox(
                 height: 10,
               ),
-              const Expanded(
-                child: Column(
-                  children: [],
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      if (vm.isBusy)
+                        const CircularProgressIndicator.adaptive()
+                      else if (vm.isIdle && vm.courseList.isEmpty)
+                        AppText.regular("No Course available.")
+                      else if (vm.isError)
+                        Text(vm.getError)
+                      else if (vm.isIdle && vm.courseList.isNotEmpty)
+                        ...List.generate(
+                          vm.courseList.length,
+                          (index) => TutorCourseCard(
+                            course: vm.courseList[index],
+                          ),
+                        )
+                    ],
+                  ),
                 ),
               )
             ],

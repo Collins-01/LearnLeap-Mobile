@@ -10,6 +10,7 @@ class Course {
   final DateTime date;
   final String id;
   final String author;
+  final String type;
   Course({
     required this.title,
     required this.backgroundImage,
@@ -19,6 +20,7 @@ class Course {
     required this.date,
     required this.id,
     required this.author,
+    required this.type,
   });
 
   Course copyWith({
@@ -30,6 +32,7 @@ class Course {
     DateTime? date,
     String? id,
     String? author,
+    String? type,
   }) {
     return Course(
       title: title ?? this.title,
@@ -40,6 +43,7 @@ class Course {
       date: date ?? this.date,
       id: id ?? this.id,
       author: author ?? this.author,
+      type: type ?? this.type,
     );
   }
 
@@ -53,6 +57,7 @@ class Course {
       'date': date.millisecondsSinceEpoch,
       'id': id,
       'author': author,
+      'type': type,
     };
   }
 
@@ -66,6 +71,7 @@ class Course {
       date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
       id: map['id'] as String,
       author: map['author'] as String,
+      type: map['type'] as String,
     );
   }
 
@@ -76,7 +82,7 @@ class Course {
 
   @override
   String toString() {
-    return 'Course(title: $title, backgroundImage: $backgroundImage, description: $description, price: $price, chapters: $chapters, date: $date, id: $id, author: $author)';
+    return 'Course(title: $title, backgroundImage: $backgroundImage, description: $description, price: $price, chapters: $chapters, date: $date, id: $id, author: $author, type: $type)';
   }
 
   @override
@@ -90,7 +96,8 @@ class Course {
         other.chapters == chapters &&
         other.date == date &&
         other.id == id &&
-        other.author == author;
+        other.author == author &&
+        other.type == type;
   }
 
   @override
@@ -102,6 +109,7 @@ class Course {
         chapters.hashCode ^
         date.hashCode ^
         id.hashCode ^
-        author.hashCode;
+        author.hashCode ^
+        type.hashCode;
   }
 }

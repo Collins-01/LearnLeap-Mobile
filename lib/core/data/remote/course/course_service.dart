@@ -30,11 +30,13 @@ class CourseServiceImpl extends CourseService {
 
   @override
   Future<CoursesByTutorResponse> getAllCoursesByTutor() async {
+    await Future.delayed(const Duration(seconds: 2));
     List<Course> courses = [
       ...List.generate(
         10,
         (index) => Course(
-          title: _faker.job.title(),
+          type: 'PHY',
+          title: "Thermodynamics",
           backgroundImage: _faker.image.image(),
           description: _faker.lorem.sentences(3).toString(),
           price: 0.00,
@@ -45,7 +47,7 @@ class CourseServiceImpl extends CourseService {
         ),
       )
     ];
-    await Future.delayed(const Duration(seconds: 2));
+
     return CoursesByTutorResponse(courses: courses);
   }
 }
