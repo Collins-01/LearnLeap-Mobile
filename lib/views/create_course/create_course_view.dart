@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:learn_leap/core/core.dart';
+import 'package:learn_leap/core/services/media_service.dart';
 import 'package:learn_leap/extensions/context_extension.dart';
+import 'package:learn_leap/views/create_course/audio_record_view.dart';
 import 'package:learn_leap/widgets/widgets.dart';
 
 import 'components/components.dart';
@@ -14,11 +16,14 @@ class CreateCourseView extends ConsumerWidget {
   final TextEditingController _courseTypeController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var mediProvider = ref.watch(mediaServiceProvider);
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           title: AppText.heading4("Create Course Studio"),
           elevation: 0.0,
@@ -121,53 +126,67 @@ class CreateCourseView extends ConsumerWidget {
                   title: "Course Price (Optional)",
                   hintText: "50.00",
                 ),
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      MediaComponent(
-                        title: "Audio",
-                        icon: Icons.mic,
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (_) => const CreateMediaButtomSheet(
-                              title1: "Record",
-                              title2: "Gallery",
+                mediProvider.mediaFile != null
+                    ? Row(
+                        children: [
+                          AppText.button(
+                              mediProvider.mediaFile!.path.split(".").last)
+                        ],
+                      )
+                    : Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            MediaComponent(
+                              title: "Audio",
+                              icon: Icons.mic,
+                              onTap: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (_) => CreateMediaButtomSheet(
+                                    title1: "Record",
+                                    onTap1: () {
+                                      Navigator.pop(context);
+                                      _scaffoldKey.currentState
+                                          ?.showBottomSheet(
+                                        (context) => const AudioRecordView(),
+                                      );
+                                    },
+                                    title2: "Gallery",
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
-                      MediaComponent(
-                        title: "Video",
-                        icon: Icons.camera_alt_rounded,
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (_) => const CreateMediaButtomSheet(
-                              title1: "Record a Video",
-                              title2: "Gallery",
+                            MediaComponent(
+                              title: "Video",
+                              icon: Icons.camera_alt_rounded,
+                              onTap: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (_) => const CreateMediaButtomSheet(
+                                    title1: "Record a Video",
+                                    title2: "Gallery",
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
-                      MediaComponent(
-                        title: "Document",
-                        icon: Icons.document_scanner,
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (_) => const CreateMediaButtomSheet(
-                              title1: "Pick a Document",
-                              isDocument: true,
-                              title2: "",
+                            MediaComponent(
+                              title: "Document",
+                              icon: Icons.document_scanner,
+                              onTap: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (_) => const CreateMediaButtomSheet(
+                                    title1: "Pick a Document",
+                                    isDocument: true,
+                                    title2: "",
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
-                ),
                 const SizedBox(
                   height: 50,
                 ),
@@ -235,11 +254,15 @@ class CreateMediaButtomSheet extends StatelessWidget {
   final String title1;
   final String title2;
   final bool isDocument;
+  final void Function()? onTap1;
+  final void Function()? onTap2;
   const CreateMediaButtomSheet({
     Key? key,
     required this.title1,
     required this.title2,
     this.isDocument = false,
+    this.onTap1,
+    this.onTap2,
   }) : super(key: key);
 
   @override
@@ -258,7 +281,7 @@ class CreateMediaButtomSheet extends StatelessWidget {
             width: context.getDeviceWidth * 0.7,
             height: 50,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: onTap1,
               style: ElevatedButton.styleFrom(
                 backgroundColor:
                     isDocument ? AppColors.primaryColor : Colors.red,
@@ -293,7 +316,7 @@ class CreateMediaButtomSheet extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: onTap2,
                     child: AppText.regular(
                       title2,
                     ),

@@ -4,22 +4,40 @@ import 'package:learn_leap/core/data/remote/auth/auth.interface.dart';
 import 'package:learn_leap/models/create_account_model.dart';
 import 'package:learn_leap/models/login_payload.dart';
 import 'package:learn_leap/core/utils/utils.dart';
+import 'package:learn_leap/models/models.dart';
 
 class AuthServiceImpl implements AuthService {
   // ignore: non_constant_identifier_names
   final NAMESPACE = '/authentication';
   final NetworkClient _client = NetworkClient();
   final _logger = appLogger(AuthServiceImpl);
+  final _duration = const Duration(seconds: 2);
 
   @override
   Future<LoginPayload> login(String username, String password) async {
-    final response = await _client.post('$NAMESPACE/login', body: {
-      'email': username,
-      'password': password,
-    });
-    final data = response['data'];
-    final payload = LoginPayload.fromMap(data);
-    return payload;
+    await Future.delayed(_duration);
+    final data = LoginPayload(
+      user: User(
+          email: 'test@gmail.com',
+          firstName: 'Collins',
+          lastName: 'Oriakhi',
+          role: Role.Student),
+      token: Token(
+        token: 'token',
+        expiration: DateTime.now().add(
+          Duration(days: 1),
+        ),
+      ),
+    );
+    // final response = await _client.post('$NAMESPACE/login', body: {
+    //   'email': username,
+    //   'password': password,
+    // });
+    // final data = response['data'];
+    // final payload = LoginPayload.fromMap(data);
+    // return payload;
+    return data;
+    // throw UserDefinedExceptions('Invalid Credenials', 'dccdchdchdhcvdjcjkdcbdhcdjcjddnmcb,djbcjdbhcb');
   }
 
   @override

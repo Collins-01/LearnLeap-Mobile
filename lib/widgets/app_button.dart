@@ -6,8 +6,8 @@ class AppButton extends StatelessWidget {
   final void Function()? onTap;
 
   const AppButton.long(this.title, {super.key, this.onTap});
-  // const AppButton({Key? key, required this.title, this.onTap})
-  //     : super(key: key);
+  const AppButton({Key? key, required this.title, this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
