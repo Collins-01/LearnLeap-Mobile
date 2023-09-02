@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:learn_leap/core/core.dart';
-import 'package:learn_leap/core/services/file_picker_sevice.dart';
+import 'package:learn_leap/core/enums/enums.dart';
 import 'package:learn_leap/core/services/media_service.dart';
 import 'package:learn_leap/extensions/context_extension.dart';
 import 'package:learn_leap/views/create_course/audio_record_view.dart';
@@ -25,7 +25,7 @@ class CreateCourseView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var mediProvider = ref.watch(mediaServiceProvider);
     var vm = ref.watch(createCourseViewModel);
-    var filePickerService = ref.read(filePickerServiceProvider);
+
     return LoaderPage(
       busy: vm.isBusy,
       child: SafeArea(
@@ -142,11 +142,15 @@ class CreateCourseView extends ConsumerWidget {
                       title: "Course Price (Optional)",
                       hintText: "50.00",
                     ),
-                    mediProvider.mediaFile != null
-                        ? Row(
+                    vm.file != null
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              AppText.button(
-                                  mediProvider.mediaFile!.path.split(".").last)
+                              TextButton(
+                                onPressed: () => vm.removeFile(),
+                                child: AppText.button("Remove"),
+                              ),
+                              AppText.small(vm.file!.path)
                             ],
                           )
                         : Center(
@@ -169,7 +173,11 @@ class CreateCourseView extends ConsumerWidget {
                                                 const AudioRecordView(),
                                           );
                                         },
-                                        title2: "Gallery",
+                                        title2: "Audio Files",
+                                        onTap2: () {
+                                          Navigator.pop(context);
+                                          vm.pickFile(MediaType.Audio);
+                                        },
                                       ),
                                     );
                                   },
@@ -180,10 +188,13 @@ class CreateCourseView extends ConsumerWidget {
                                   onTap: () {
                                     showModalBottomSheet(
                                       context: context,
-                                      builder: (_) =>
-                                          const CreateMediaButtomSheet(
+                                      builder: (_) => CreateMediaButtomSheet(
                                         title1: "Record a Video",
                                         title2: "Gallery",
+                                        onTap2: () {
+                                          Navigator.pop(context);
+                                          vm.pickFile(MediaType.Video);
+                                        },
                                       ),
                                     );
                                   },
@@ -200,7 +211,7 @@ class CreateCourseView extends ConsumerWidget {
                                         title2: "",
                                         onTap1: () async {
                                           Navigator.pop(context);
-                                          await filePickerService.pickFile();
+                                          vm.pickFile(MediaType.Document);
                                         },
                                       ),
                                     );
@@ -210,11 +221,54 @@ class CreateCourseView extends ConsumerWidget {
                             ),
                           ),
                     const SizedBox(
+                      height: 20,
+                    ),
+                    AppText.medium("Select background image"),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 180,
+                      width: context.getDeviceWidth,
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                      ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          vm.backgroundImage != null
+                              ? Positioned.fill(
+                                  child: Image.file(
+                                    vm.backgroundImage!,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
+                          IconButton(
+                            onPressed: () => vm.pickBackgroundImage(),
+                            icon: const Icon(Icons.add),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
                       height: 50,
                     ),
                     AppButton.long(
                       "Create",
                       onTap: () {
+                        if (vm.file == null) {
+                          AppFlushBar.showError(
+                              title: "No File selected",
+                              message:
+                                  "Please select a media file that you want to upload.");
+                        }
+                        if (vm.backgroundImage == null) {
+                          AppFlushBar.showError(
+                              title: "No background image selected",
+                              message:
+                                  "Please select a background image that you want to upload.");
+                        }
                         if (_formKey.currentState!.validate()) {
                           return;
                         } else {
@@ -222,7 +276,10 @@ class CreateCourseView extends ConsumerWidget {
                               _descriptionController.text);
                         }
                       },
-                    )
+                    ),
+                    const SizedBox(
+                      height: 100,
+                    ),
                   ],
                 ),
               ),
