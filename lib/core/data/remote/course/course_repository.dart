@@ -16,9 +16,8 @@ class CourseRepositoryImpl extends CourseRepository {
   }
 
   @override
-  Future<CreateCourseResponse> createCourse(CreateCourseDTO dto) {
-    // TODO: implement createCourse
-    throw UnimplementedError();
+  Future<CreateCourseResponse> createCourse(CreateCourseDTO dto) async {
+    return await _courseService.createCourse(dto);
   }
 
   @override

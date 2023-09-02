@@ -262,7 +262,7 @@ class CreateCourseView extends ConsumerWidget {
                     ),
                     AppButton.long(
                       "Create",
-                      onTap: () {
+                      onTap: () async {
                         if (vm.file == null) {
                           AppFlushBar.showError(
                               title: "No File selected",
@@ -275,10 +275,11 @@ class CreateCourseView extends ConsumerWidget {
                               message:
                                   "Please select a background image that you want to upload.");
                         }
-                        if (_formKey.currentState!.validate()) {
+                        if (!_formKey.currentState!.validate()) {
                           return;
                         } else {
-                          vm.createCourse(
+                          print("jbvvdjhjkdhlk");
+                          await vm.createCourse(
                             _titleController.text,
                             _descriptionController.text,
                             _courseTypeController.text,

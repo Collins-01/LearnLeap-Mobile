@@ -35,8 +35,8 @@ class CreateCourseViewModel extends BaseViewModel {
         price: price,
       );
       changeState(const ViewModelState.busy());
-      final response = await _courseRepository.createCourse(dto);
-
+      await _courseRepository.createCourse(dto);
+      NavigationService.instance.goBack();
       changeState(const ViewModelState.idle());
     } on Failure catch (e) {
       _logger.e(e.message);

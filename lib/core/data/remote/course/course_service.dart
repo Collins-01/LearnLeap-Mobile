@@ -30,7 +30,7 @@ class CourseServiceImpl extends CourseService {
 
   @override
   Future<CoursesByTutorResponse> getAllCoursesByTutor() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 4));
     List<Course> courses = [
       ...List.generate(
         10,
