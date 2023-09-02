@@ -97,25 +97,31 @@ class CreateCourseView extends ConsumerWidget {
                                     children: [
                                       ...List.generate(
                                         20,
-                                        (index) => Container(
-                                          height: 45,
-                                          width: 80,
-                                          margin:
-                                              const EdgeInsets.only(right: 10),
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 12,
-                                            vertical: 8,
-                                          ),
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.primaryColor
-                                                .withOpacity(.3),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                              Radius.circular(12),
+                                        (index) => InkWell(
+                                          onTap: () {
+                                            _courseTypeController.text = "PHY";
+                                            Navigator.pop(context);
+                                          },
+                                          child: Container(
+                                            height: 45,
+                                            width: 80,
+                                            margin: const EdgeInsets.only(
+                                                right: 10),
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 12,
+                                              vertical: 8,
                                             ),
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              color: AppColors.primaryColor
+                                                  .withOpacity(.3),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(12),
+                                              ),
+                                            ),
+                                            child: AppText.heading5("CSC"),
                                           ),
-                                          child: AppText.heading5("CSC"),
                                         ),
                                       )
                                     ],
@@ -272,8 +278,16 @@ class CreateCourseView extends ConsumerWidget {
                         if (_formKey.currentState!.validate()) {
                           return;
                         } else {
-                          vm.createCourse(_titleController.text,
-                              _descriptionController.text);
+                          vm.createCourse(
+                            _titleController.text,
+                            _descriptionController.text,
+                            _courseTypeController.text,
+                            _priceController.text.isEmpty
+                                ? 0.0
+                                : double.tryParse(
+                                    _priceController.text,
+                                  ),
+                          );
                         }
                       },
                     ),

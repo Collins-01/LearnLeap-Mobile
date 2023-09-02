@@ -18,12 +18,22 @@ class CreateCourseViewModel extends BaseViewModel {
 
   File? _file;
   File? get file => _file;
+  MediaType? _mediaType;
 
   File? _backgroundImage;
   File? get backgroundImage => _backgroundImage;
-  Future<void> createCourse(String title, String description) async {
+  Future<void> createCourse(String title, String description, String courseType,
+      double? price) async {
     try {
-      final dto = CreateCourseDTO();
+      final dto = CreateCourseDTO(
+        backgroundImage: _backgroundImage!,
+        courseType: courseType,
+        description: description,
+        media: _file!,
+        mediaType: _mediaType!,
+        title: title,
+        price: price,
+      );
       changeState(const ViewModelState.busy());
       final response = await _courseRepository.createCourse(dto);
 
@@ -49,6 +59,7 @@ class CreateCourseViewModel extends BaseViewModel {
       final result = await _filePickerService.pickFile(mediaType);
       if (result != null) {
         _file = result;
+        _mediaType = mediaType;
         notifyListeners();
       }
     } catch (e) {
