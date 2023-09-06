@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learn_leap/core/core.dart';
 import 'package:learn_leap/core/domain/user_domain.dart';
-import 'package:learn_leap/core/utils/utils.dart';
-import 'package:learn_leap/views/create_course/create_course_view.dart';
 import 'package:learn_leap/views/home/components/components.dart';
 import 'package:learn_leap/views/home/viewmodels/tutor_home_viewmodel.dart';
 
@@ -47,11 +46,13 @@ class _TutorsHomeViewState extends ConsumerState<TutorsHomeView> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => CreateCourseView(),
-                        ),
-                      );
+                      NavigationService.instance
+                          .navigateTo(NavigatorRoutes.createCourseView);
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     builder: (_) => CreateCourseView(),
+                      //   ),
+                      // );
                     },
                     child: AppText.button(
                       "Create",
@@ -64,28 +65,32 @@ class _TutorsHomeViewState extends ConsumerState<TutorsHomeView> {
                 height: 10,
               ),
               Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      if (vm.isBusy)
-                        const CircularProgressIndicator.adaptive()
-                      else if (vm.isIdle && vm.courseList.isEmpty)
-                        AppText.regular("No Course available.")
-                      else if (vm.isError)
-                        Text(vm.getError)
-                      else if (vm.isIdle && vm.courseList.isNotEmpty)
-                        ...List.generate(
-                          vm.courseList.length,
-                          (index) => TutorCourseCard(
-                            course: vm.courseList[index],
-                          ),
-                        )
-                    ],
-                  ),
-                ),
+                child: ValueListenableBuilder(
+                    valueListenable: vm.courseList,
+                    builder: (context, items, child) {
+                      return SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            if (vm.isBusy)
+                              const CircularProgressIndicator.adaptive()
+                            else if (vm.isIdle && items.isEmpty)
+                              AppText.regular("No Course available.")
+                            else if (vm.isError)
+                              Text(vm.getError)
+                            else if (vm.isIdle && items.isNotEmpty)
+                              ...List.generate(
+                                items.length,
+                                (index) => TutorCourseCard(
+                                  course: items[index],
+                                ),
+                              )
+                          ],
+                        ),
+                      );
+                    }),
               )
             ],
           ),

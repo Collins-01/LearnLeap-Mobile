@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learn_leap/core/core.dart';
 import 'package:learn_leap/core/data/network/network.dart';
@@ -10,14 +11,12 @@ class TutorHomeViewmodel extends BaseViewModel {
   final _logger = appLogger(TutorHomeViewmodel);
   final CourseRepository _courseRepository;
   TutorHomeViewmodel(this._courseRepository);
-  List<Course> _courseList = [];
-  List<Course> get courseList => _courseList;
-  getAllCourses() async {
+  ValueNotifier<List<Course>> get _courseList => _courseRepository.tutorCourses;
+  ValueNotifier<List<Course>> get courseList => _courseList;
+  Future<void> getAllCourses() async {
     try {
       changeState(const ViewModelState.busy());
-      final response = await _courseRepository.getAllCoursesByTutor();
-      _courseList = response.courses;
-      notifyListeners();
+      await _courseRepository.getAllCoursesByTutor();
       changeState(const ViewModelState.idle());
     } on Failure catch (e) {
       _logger.e(e.message);

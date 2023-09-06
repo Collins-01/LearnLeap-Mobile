@@ -10,4 +10,5 @@ class NavigatorRoutes {
   static const String resetPasswordView = "/resetPasswordView";
   static const String homeView = "/homeView";
   static const String dashBoardView = "/dashBoardView";
+  static const String createCourseView = "/createCourseView";
 }

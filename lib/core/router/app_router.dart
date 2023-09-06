@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_leap/views/create_course/create_course_view.dart';
 import 'package:learn_leap/views/dash_board/dash_board_view.dart';
 import 'package:learn_leap/views/student/home/home_view.dart';
 
@@ -39,6 +40,11 @@ class AppRouter {
         return _getPageRoute(
           settings: settings,
           viewToShow: LoginView(),
+        );
+      case NavigatorRoutes.createCourseView:
+        return _getPageRoute(
+          settings: settings,
+          viewToShow: CreateCourseView(),
         );
       case NavigatorRoutes.preSignUpView:
         return _getPageRoute(
