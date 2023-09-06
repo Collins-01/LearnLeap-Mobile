@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learn_leap/core/domain/user_domain.dart';
 import 'package:learn_leap/core/utils/utils.dart';
 import 'package:learn_leap/views/create_course/create_course_view.dart';
 import 'package:learn_leap/views/home/components/components.dart';
@@ -24,6 +25,7 @@ class _TutorsHomeViewState extends ConsumerState<TutorsHomeView> {
   @override
   Widget build(BuildContext context) {
     final vm = ref.watch(tutorHomeViewmodel);
+    final currentUser = ref.watch(userDomainProvider).currentUser.value;
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -39,7 +41,7 @@ class _TutorsHomeViewState extends ConsumerState<TutorsHomeView> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AppText.heading4("Welcome Tutor Ryan"),
+                      AppText.heading4("Welcome  ${currentUser?.firstName}"),
                       AppText.regular("Get started by creating a course"),
                     ],
                   ),

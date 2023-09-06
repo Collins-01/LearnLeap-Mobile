@@ -1,16 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-
 enum Role {
+  // ignore: constant_identifier_names
   Student,
+  // ignore: constant_identifier_names
   Tutor
 }
 
 extension RoleExtension on Role {
-  bool get isStudent => this==Role.Student;
-  bool get isTutor=> this==Role.Tutor;
+  bool get isStudent => this == Role.Student;
+  bool get isTutor => this == Role.Tutor;
 }
+
 class User {
   final String email;
   final String firstName;
@@ -48,25 +50,20 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      email: map['email'] as String,
-      firstName: map['firstName'] as String,
-      lastName: map['lastName'] as String,
-      role: _roleFromMap(map['role'] as String )
-    );
-    
+        email: map['email'] as String,
+        firstName: map['firstName'] as String,
+        lastName: map['lastName'] as String,
+        role: _roleFromMap(map['role'] as String));
   }
 
-  static Role _roleFromMap(String value){
-    if(value =='student'){
+  static Role _roleFromMap(String value) {
+    if (value == 'student') {
       return Role.Student;
-    }
-    else if (value == 'tutor'){
+    } else if (value == 'tutor') {
       return Role.Student;
+    } else {
+      throw UnsupportedError('Role $value not supported');
     }
-    else {
-      throw UnsupportedError('Role ${value} not supported');
-    }
-    
   }
 
   String toJson() => json.encode(toMap());
