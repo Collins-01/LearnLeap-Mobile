@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:learn_leap/widgets/widgets.dart';
 
 import '../../../core/core.dart';
@@ -53,31 +52,31 @@ class LoginView extends ConsumerWidget {
                       "Forgot password?",
                       color: const Color(0xFF92929F),
                     ),
-                    const SizedBox(height: 10),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        height: 55,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(12),
-                            ),
-                            border: Border.all()),
-                        alignment: Alignment.center,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset("assets/svg/google.svg"),
-                            const SizedBox(width: 16),
-                            AppText.medium(
-                              "Login with Google",
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    const SizedBox(height: 50),
+                    // InkWell(
+                    //   onTap: () {},
+                    //   child: Container(
+                    //     height: 55,
+                    //     width: double.infinity,
+                    //     decoration: BoxDecoration(
+                    //         borderRadius: const BorderRadius.all(
+                    //           Radius.circular(12),
+                    //         ),
+                    //         border: Border.all()),
+                    //     alignment: Alignment.center,
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.center,
+                    //       children: [
+                    //         SvgPicture.asset("assets/svg/google.svg"),
+                    //         const SizedBox(width: 16),
+                    //         AppText.medium(
+                    //           "Login with Google",
+                    //           color: Colors.black,
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                     const SizedBox(height: 15),
                     Center(
                       child: InkWell(

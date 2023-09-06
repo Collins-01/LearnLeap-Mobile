@@ -25,7 +25,7 @@ class AppButton extends StatelessWidget {
             ),
           ),
         ),
-        child: AppText.heading6(
+        child: AppText.heading4(
           title,
           color: Colors.white,
         ),

@@ -6,7 +6,7 @@ import 'package:learn_leap/core/domain/user_domain.dart';
 import 'package:learn_leap/core/utils/utils.dart';
 import 'package:learn_leap/models/user_model.dart';
 import 'package:learn_leap/views/home/tutor_home_view.dart';
-import 'package:learn_leap/views/student/profile/profile_view.dart';
+import 'package:learn_leap/views/create_course/profile/profile_view.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../student/home/home_view.dart';

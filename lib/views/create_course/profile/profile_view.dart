@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learn_leap/core/domain/user_domain.dart';
+import 'package:learn_leap/views/create_course/profile/viewmodels/profile_viewmodel.dart';
 
 import '../../../core/core.dart';
 import '../../../widgets/widgets.dart';
@@ -13,6 +14,8 @@ class ProfileView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     var currentUser = ref.watch(userDomainProvider).currentUser.value;
+
+    var vm = ref.watch(profileViewModelProvider);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -74,7 +77,40 @@ class ProfileView extends ConsumerWidget {
                 ),
                 Gap.h8,
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        title:
+                            AppText.heading3("Are you sure you want to logout"),
+                        content: AppText.medium(
+                          "By logging out, all your details will be cleared from this device.",
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () async {
+                              NavigationService.instance.goBack();
+                              await Future.delayed(const Duration(seconds: 1));
+                              vm.logOut();
+                            },
+                            child: AppText.button(
+                              "Yes",
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              NavigationService.instance.goBack();
+                            },
+                            child: AppText.button(
+                              "No",
+                              color: Colors.red,
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
                   child: const ProfileCard(
                     title: "Logout",
                     icon: Icons.login,
