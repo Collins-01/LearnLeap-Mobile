@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learn_leap/core/data/network/network.dart';
 import 'package:learn_leap/core/data/remote/auth/auth.interface.dart';
 import 'package:learn_leap/models/create_account_model.dart';
-import 'package:learn_leap/models/login_payload.dart';
 import 'package:learn_leap/core/utils/utils.dart';
 import 'package:learn_leap/models/models.dart';
 
@@ -24,9 +23,7 @@ class AuthServiceImpl implements AuthService {
           role: Role.Student),
       token: Token(
         token: 'token',
-        expiration: DateTime.now().add(
-          Duration(days: 1),
-        ),
+        expiration: DateTime.now().add(_duration),
       ),
     );
     // final response = await _client.post('$NAMESPACE/login', body: {
@@ -48,11 +45,13 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<void> signup(CreateAccount dto) async {
-    final response =
-        await _client.post("$NAMESPACE/signup", body: dto.toJson());
-    _logger.d(
-      "Response from SignUp ==> ${response.toString()}",
-    );
+    // final response =
+    //     await _client.post("$NAMESPACE/signup", body: dto.toJson());
+    // _logger.d(
+    //   "Response from SignUp ==> ${response.toString()}",
+    // );
+    _logger.d("Creating account for ${dto.firstName}");
+    await Future.delayed(const Duration(seconds: 3));
   }
 
   @override

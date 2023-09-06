@@ -46,14 +46,19 @@ class _AppTextFieldState extends State<AppTextField> {
         // inputFormatters: widget.inputFormatters,
         controller: widget.controller,
         style: mediumStyle,
+
         validator: widget.validator,
         obscureText: (widget.isPassword && obscure),
         decoration: InputDecoration(
           labelText: widget.title,
           // filled: true,
           fillColor: AppColors.textFieldColor,
-          border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12))),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.primaryColor),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(4),
+            ),
+          ),
           hintText: widget.hintText,
           hintStyle: mediumStyle,
           prefixIcon: widget.prefixIcon,

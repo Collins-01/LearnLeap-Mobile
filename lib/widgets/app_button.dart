@@ -4,9 +4,10 @@ import 'package:learn_leap/core/utils/utils.dart';
 class AppButton extends StatelessWidget {
   final String title;
   final void Function()? onTap;
+  final Color? buttonColor;
 
-  const AppButton.long(this.title, {super.key, this.onTap});
-  const AppButton({Key? key, required this.title, this.onTap})
+  const AppButton.long(this.title, {super.key, this.onTap, this.buttonColor});
+  const AppButton({Key? key, required this.title, this.onTap, this.buttonColor})
       : super(key: key);
 
   @override
@@ -17,14 +18,14 @@ class AppButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primaryColor,
+          backgroundColor: buttonColor ?? AppColors.primaryColor,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(12),
             ),
           ),
         ),
-        child: AppText.heading6(
+        child: AppText.heading4(
           title,
           color: Colors.white,
         ),
