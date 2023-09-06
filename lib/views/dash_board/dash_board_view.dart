@@ -22,13 +22,13 @@ class DashBoardView extends ConsumerWidget {
     return PersistentTabView(
       context,
       controller: _controller,
-      screens: [
-        currentUser!.role.isTutor ? const TutorsHomeView() : const HomeView(),
-        const HomeView(),
-        const HomeView(),
-        const ProfileView(),
-      ],
-      items: _navBarsItems(),
+      screens: currentUser!.role.isTutor
+          ? _buildTutorScreens()
+          : _buildStudentScreens(),
+
+      items: currentUser.role.isStudent
+          ? _studentNavBarsItems()
+          : _tutorNavBarsItems(),
       confineInSafeArea: true,
       backgroundColor: Colors.white, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
@@ -59,7 +59,40 @@ class DashBoardView extends ConsumerWidget {
     );
   }
 
-  List<PersistentBottomNavBarItem> _navBarsItems() {
+  _buildTutorScreens() {
+    return [const TutorsHomeView(), const ProfileView()];
+  }
+
+  _buildStudentScreens() {
+    return [
+      const HomeView(),
+      const HomeView(),
+      const HomeView(),
+      const ProfileView()
+    ];
+  }
+
+  List<PersistentBottomNavBarItem> _tutorNavBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.home),
+        title: "Home",
+        activeColorPrimary: AppColors.primaryColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const BuildIconWithIndicator(
+          icon: CupertinoIcons.person,
+          value: 0,
+        ),
+        title: "Profile",
+        activeColorPrimary: AppColors.primaryColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+    ];
+  }
+
+  List<PersistentBottomNavBarItem> _studentNavBarsItems() {
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.home),
