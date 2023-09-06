@@ -45,11 +45,13 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<void> signup(CreateAccount dto) async {
-    final response =
-        await _client.post("$NAMESPACE/signup", body: dto.toJson());
-    _logger.d(
-      "Response from SignUp ==> ${response.toString()}",
-    );
+    // final response =
+    //     await _client.post("$NAMESPACE/signup", body: dto.toJson());
+    // _logger.d(
+    //   "Response from SignUp ==> ${response.toString()}",
+    // );
+    _logger.d("Creating account for ${dto.firstName}");
+    await Future.delayed(const Duration(seconds: 3));
   }
 
   @override

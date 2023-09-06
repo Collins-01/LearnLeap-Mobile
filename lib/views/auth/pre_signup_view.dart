@@ -18,13 +18,16 @@ class PreSignUpView extends StatelessWidget {
               ),
               const Spacer(),
               AppButton.long("Sign up as a Tutor", onTap: () {
-                NavigationService.instance
-                    .navigateToReplace(NavigatorRoutes.signUpView);
+                NavigationService.instance.navigateToReplace(
+                    NavigatorRoutes.signUpView,
+                    argument: {RoutingArgumentKey.role: true});
               }),
               const SizedBox(height: 25),
               AppButton.long("Sign up as a Student", onTap: () {
-                NavigationService.instance
-                    .navigateToReplace(NavigatorRoutes.signUpView);
+                NavigationService.instance.navigateToReplace(
+                  NavigatorRoutes.signUpView,
+                  argument: {RoutingArgumentKey.role: false},
+                );
               }),
             ],
           ),

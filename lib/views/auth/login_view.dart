@@ -20,7 +20,7 @@ class LoginView extends ConsumerWidget {
       cancelRequest: () => vm.cancelRequest(),
       child: Scaffold(
         backgroundColor: Colors.white,
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         body: Padding(
           padding:
               EdgeInsets.symmetric(horizontal: SizingConfig.defaultPadding),
@@ -45,7 +45,7 @@ class LoginView extends ConsumerWidget {
                       title: "Password",
                       controller: passwordController,
                       hintText: "********",
-                      isPassword: false,
+                      isPassword: true,
                       validator: FieldValidators.password,
                     ),
                     AppText.medium(

@@ -53,8 +53,9 @@ class _AppTextFieldState extends State<AppTextField> {
           labelText: widget.title,
           // filled: true,
           fillColor: AppColors.textFieldColor,
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.primaryColor),
+            borderRadius: const BorderRadius.all(
               Radius.circular(4),
             ),
           ),

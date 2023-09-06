@@ -52,9 +52,12 @@ class AppRouter {
           viewToShow: const PreSignUpView(),
         );
       case NavigatorRoutes.signUpView:
+        var role = routeArgs[RoutingArgumentKey.role];
         return _getPageRoute(
           settings: settings,
-          viewToShow: SignUpView(),
+          viewToShow: SignUpView(
+            isTutor: role,
+          ),
         );
       case NavigatorRoutes.otpVerificationView:
         var email = routeArgs[RoutingArgumentKey.email];
