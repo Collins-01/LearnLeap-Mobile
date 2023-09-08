@@ -7,6 +7,11 @@ abstract class CourseInterface {
   Future<CoursesByTutorResponse> getAllCoursesByTutor();
   Future<CreateCourseResponse> createCourse(CreateCourseDTO dto);
   ValueNotifier<List<Course>> get tutorCourses;
+  //* Enrollments
+  ValueNotifier<List<Enrollment>> get enrolledCourses;
+  Future<List<Enrollment>> getAllEnrolledCourses();
+  Future<void> removeEnrollment(String courseId);
+  Future<void> enrollCourse(String id);
 }
 
 abstract class CourseRepository extends CourseInterface {}

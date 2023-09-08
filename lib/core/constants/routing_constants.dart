@@ -11,4 +11,5 @@ class NavigatorRoutes {
   static const String homeView = "/homeView";
   static const String dashBoardView = "/dashBoardView";
   static const String createCourseView = "/createCourseView";
+  static const String enrollmentInfoView = "/enrollmentInfoView";
 }

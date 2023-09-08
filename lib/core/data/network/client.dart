@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:mime/mime.dart';
 
 import 'failure.dart';
 import 'network_client_interceptors.dart';
 
+ProviderContainer cache = ProviderContainer();
 Dio _createDio() {
   String baseUrl =
       'http://${Platform.isAndroid ? '10.0.2.2' : 'localhost'}:3000';
@@ -15,7 +17,7 @@ Dio _createDio() {
       receiveTimeout: const Duration(seconds: 35), // 15 seconds
       connectTimeout: const Duration(seconds: 35),
       sendTimeout: const Duration(seconds: 60),
-      headers: {},
+      headers: {"Authorization": "Bearer $cache"},
     ),
   );
 

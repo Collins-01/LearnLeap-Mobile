@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_leap/views/create_course/create_course_view.dart';
 import 'package:learn_leap/views/dash_board/dash_board_view.dart';
+import 'package:learn_leap/views/enrollments/enrollment_info_view.dart';
 import 'package:learn_leap/views/student/home/home_view.dart';
 
 import '../../views/views.dart';
@@ -65,6 +66,14 @@ class AppRouter {
           settings: settings,
           viewToShow: OtpView(
             email: email,
+          ),
+        );
+      case NavigatorRoutes.enrollmentInfoView:
+        var enrollment = routeArgs[RoutingArgumentKey.enrollment];
+        return _getPageRoute(
+          settings: settings,
+          viewToShow: EnrollmentInfoView(
+            enrollment: enrollment,
           ),
         );
       case NavigatorRoutes.forgotPasswordView:

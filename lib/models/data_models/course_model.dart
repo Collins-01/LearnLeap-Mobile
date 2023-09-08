@@ -6,7 +6,6 @@ class Course {
   final String backgroundImage;
   final String description;
   final double price;
-  final int chapters;
   final DateTime date;
   final String id;
   final String author;
@@ -16,7 +15,6 @@ class Course {
     required this.backgroundImage,
     required this.description,
     required this.price,
-    required this.chapters,
     required this.date,
     required this.id,
     required this.author,
@@ -39,7 +37,6 @@ class Course {
       backgroundImage: backgroundImage ?? this.backgroundImage,
       description: description ?? this.description,
       price: price ?? this.price,
-      chapters: chapters ?? this.chapters,
       date: date ?? this.date,
       id: id ?? this.id,
       author: author ?? this.author,
@@ -53,7 +50,6 @@ class Course {
       'backgroundImage': backgroundImage,
       'description': description,
       'price': price,
-      'chapters': chapters,
       'date': date.millisecondsSinceEpoch,
       'id': id,
       'author': author,
@@ -67,7 +63,6 @@ class Course {
       backgroundImage: map['backgroundImage'] as String,
       description: map['description'] as String,
       price: map['price'] as double,
-      chapters: map['chapters'] as int,
       date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
       id: map['id'] as String,
       author: map['author'] as String,
@@ -82,7 +77,7 @@ class Course {
 
   @override
   String toString() {
-    return 'Course(title: $title, backgroundImage: $backgroundImage, description: $description, price: $price, chapters: $chapters, date: $date, id: $id, author: $author, type: $type)';
+    return 'Course(title: $title, backgroundImage: $backgroundImage, description: $description, price: $price, date: $date, id: $id, author: $author, type: $type)';
   }
 
   @override
@@ -93,7 +88,6 @@ class Course {
         other.backgroundImage == backgroundImage &&
         other.description == description &&
         other.price == price &&
-        other.chapters == chapters &&
         other.date == date &&
         other.id == id &&
         other.author == author &&
@@ -106,7 +100,6 @@ class Course {
         backgroundImage.hashCode ^
         description.hashCode ^
         price.hashCode ^
-        chapters.hashCode ^
         date.hashCode ^
         id.hashCode ^
         author.hashCode ^

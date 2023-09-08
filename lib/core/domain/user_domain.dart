@@ -17,7 +17,7 @@ class UserDomain {
       email: 'test@gmail.com',
       firstName: 'Collins',
       lastName: 'Oriakhi',
-      role: Role.Tutor,
+      role: Role.Student,
     );
     _logger.d("Current User Info: ${_currentUser.value?.toMap()} ");
   }

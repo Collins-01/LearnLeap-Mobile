@@ -18,6 +18,9 @@ class CourseServiceImpl extends CourseService {
   final _logger = appLogger(CourseServiceImpl);
   final ValueNotifier<List<Course>> _tutorCourses =
       ValueNotifier<List<Course>>([]);
+  @override
+  final ValueNotifier<List<Enrollment>> _enrolledCourses =
+      ValueNotifier<List<Enrollment>>([]);
 
   @override
   Future<CreateCourseResponse> createCourse(CreateCourseDTO dto) async {
@@ -26,7 +29,6 @@ class CourseServiceImpl extends CourseService {
       backgroundImage: _faker.image.image(),
       description: dto.description,
       price: dto.price ?? 0.0,
-      chapters: 0,
       date: DateTime.now(),
       id: _faker.guid.guid(),
       author: "Oriakhi Collins",
@@ -48,6 +50,25 @@ class CourseServiceImpl extends CourseService {
 
   @override
   ValueNotifier<List<Course>> get tutorCourses => _tutorCourses;
+
+  @override
+  Future<void> enrollCourse(String id) async {
+    // final response = await _client.
+  }
+
+  @override
+  ValueNotifier<List<Enrollment>> get enrolledCourses => _enrolledCourses;
+
+  @override
+  Future<List<Enrollment>> getAllEnrolledCourses() async {
+    await _client.get("");
+    return _enrolledCourses.value;
+  }
+
+  @override
+  Future<void> removeEnrollment(String courseId) async {
+    _enrolledCourses.value.removeWhere((e) => e.id == courseId);
+  }
 }
 
 final courseServiceProvider = Provider<CourseService>((ref) {

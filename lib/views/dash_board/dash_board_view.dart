@@ -5,11 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learn_leap/core/domain/user_domain.dart';
 import 'package:learn_leap/core/utils/utils.dart';
 import 'package:learn_leap/models/user_model.dart';
+import 'package:learn_leap/views/downloads/downloads_view.dart';
+import 'package:learn_leap/views/enrollments/enrollments_view.dart';
+import 'package:learn_leap/views/home/student_home_view.dart';
 import 'package:learn_leap/views/home/tutor_home_view.dart';
 import 'package:learn_leap/views/create_course/profile/profile_view.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
-import '../student/home/home_view.dart';
 
 class DashBoardView extends ConsumerWidget {
   DashBoardView({Key? key}) : super(key: key);
@@ -65,9 +66,9 @@ class DashBoardView extends ConsumerWidget {
 
   _buildStudentScreens() {
     return [
-      const HomeView(),
-      const HomeView(),
-      const HomeView(),
+      const StudentHomeView(),
+      const EnrollmentView(),
+      const DownloadsView(),
       const ProfileView()
     ];
   }
@@ -107,8 +108,8 @@ class DashBoardView extends ConsumerWidget {
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.class_outlined),
-        title: "Courses",
+        icon: const Icon(Icons.download),
+        title: "Donwloads",
         activeColorPrimary: AppColors.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),

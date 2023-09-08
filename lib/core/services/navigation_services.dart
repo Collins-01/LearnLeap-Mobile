@@ -22,12 +22,12 @@ class NavigationService {
     return navigatorKey.currentState!
         .pushReplacementNamed(routeName, arguments: argument);
   }
-   // remove current view and stack new one
+
+  // remove current view and stack new one
   void navigateToReplaceUntil(String routeName) {
     return navigatorKey.currentState!
         .popUntil((route) => route.settings.name == routeName);
   }
-
 
   Future<dynamic> logOut(String routeName, {Object? argument}) {
     // navigatorKey.currentState.

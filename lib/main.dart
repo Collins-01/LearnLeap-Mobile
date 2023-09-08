@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'LearnLeap',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
-        // useMaterial3: true,
+        useMaterial3: true,
       ),
       home: const SplashScreenView(),
       navigatorKey: NavigationService.instance.navigatorKey,
