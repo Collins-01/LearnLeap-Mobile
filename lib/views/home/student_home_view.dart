@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learn_leap/core/domain/user_domain.dart';
-import 'package:responsive_grid/responsive_grid.dart';
+import 'package:learn_leap/views/home/course_grid_section.dart';
 
 import '../../../core/core.dart';
 import '../../../widgets/widgets.dart';
@@ -13,11 +13,11 @@ class StudentHomeView extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends ConsumerState<StudentHomeView> {
+class _HomeViewState extends ConsumerState<StudentHomeView>
+    with SingleTickerProviderStateMixin {
   final TextEditingController _controller = TextEditingController();
-  final PageController _pagecontroller = PageController(initialPage: 0);
+  // final PageController _pagecontroller = PageController(initialPage: 0);
 
-  late final int _selected = 0;
   List<String> courses = [
     "All",
     "CSC",
@@ -93,35 +93,12 @@ class _HomeViewState extends ConsumerState<StudentHomeView> {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        SingleChildScrollView(
-                          child: ResponsiveGridRow(
-                            children: [
-                              ...List.generate(
-                                10,
-                                (index) => ResponsiveGridCol(
-                                  xs: 6,
-                                  md: 3,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Container(
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(10),
-                                        ),
-                                        color: Colors.blue,
-                                      ),
-                                      height: 200,
-                                      width: 200,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                        ...List.generate(
+                          courses.length,
+                          (index) => CourseGridSection(
+                            type: courses[index],
                           ),
-                        ),
-                        const Text("dcjcd"),
-                        const Text("dcjcd"),
-                        const Text("dcjcd"),
+                        )
                       ],
                     ),
                   )

@@ -105,4 +105,17 @@ class Course {
         author.hashCode ^
         type.hashCode;
   }
+
+  static Course dummyData = Course(
+    type: 'PHY',
+    author: 'John Kennedy',
+    backgroundImage:
+        'https://images.unsplash.com/photo-1610720707798-6fe21dc165ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2030&q=80',
+    date: DateTime.now(),
+    description:
+        'Exercitation pariatur sit occaecat exercitation aliqua nostrud pariatur nulla ut. Ad consectetur proident cillum eu sunt est ut. Occaecat anim officia cupidatat reprehenderit tempor sint laboris eu magna. Aliquip sunt pariatur aute minim laboris qui dolor Lorem enim ex dolore commodo sunt. Ipsum adipisicing proident veniam duis laborum aute ullamco ipsum sunt dolore reprehenderit esse ea pariatur. Mollit irure in incididunt commodo magna anim excepteur ullamco laborum sint nulla ea amet.',
+    id: '01',
+    price: 100,
+    title: 'Nuclear Physics',
+  );
 }
