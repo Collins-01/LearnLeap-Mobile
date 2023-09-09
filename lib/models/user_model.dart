@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 
 enum Role {
   // ignore: constant_identifier_names
@@ -14,47 +13,57 @@ extension RoleExtension on Role {
 }
 
 class User {
+  final String id;
   final String email;
   final String firstName;
   final String lastName;
   final Role role;
+  final bool isVerified;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
   User({
+    required this.id,
     required this.email,
     required this.firstName,
     required this.lastName,
     required this.role,
+    required this.isVerified,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   User copyWith({
+    String? id,
     String? email,
     String? firstName,
     String? lastName,
     Role? role,
-  }) {
-    return User(
-      email: email ?? this.email,
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
-      role: role ?? this.role,
-    );
-  }
+    bool? isVerified,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) =>
+      User(
+        id: id ?? this.id,
+        email: email ?? this.email,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        role: role ?? this.role,
+        isVerified: isVerified ?? this.isVerified,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'email': email,
-      'firstName': firstName,
-      'lastName': lastName,
-      'role': role.name,
-    };
-  }
-
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-        email: map['email'] as String,
-        firstName: map['firstName'] as String,
-        lastName: map['lastName'] as String,
-        role: _roleFromMap(map['role'] as String));
-  }
+  factory User.fromMap(Map<String, dynamic> json) => User(
+        id: json["_id"],
+        email: json["email"],
+        firstName: json["firstName"],
+        lastName: json["lastName"],
+        role: _roleFromMap(json["role"]),
+        isVerified: json["isVerified"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+      );
 
   static Role _roleFromMap(String value) {
     if (value == 'student') {
@@ -66,31 +75,14 @@ class User {
     }
   }
 
-  String toJson() => json.encode(toMap());
-
-  factory User.fromJson(String source) =>
-      User.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'User(email: $email, firstName: $firstName, lastName: $lastName, role: $role)';
-  }
-
-  @override
-  bool operator ==(covariant User other) {
-    if (identical(this, other)) return true;
-
-    return other.email == email &&
-        other.firstName == firstName &&
-        other.lastName == lastName &&
-        other.role == role;
-  }
-
-  @override
-  int get hashCode {
-    return email.hashCode ^
-        firstName.hashCode ^
-        lastName.hashCode ^
-        role.hashCode;
-  }
+  Map<String, dynamic> toMap() => {
+        "_id": id,
+        "email": email,
+        "firstName": firstName,
+        "lastName": lastName,
+        "role": role.name,
+        "isVerified": isVerified,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+      };
 }

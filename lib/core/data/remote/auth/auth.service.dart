@@ -14,26 +14,27 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<LoginPayload> login(String username, String password) async {
-    await Future.delayed(_duration);
-    final data = LoginPayload(
-      user: User(
-          email: 'test@gmail.com',
-          firstName: 'Collins',
-          lastName: 'Oriakhi',
-          role: Role.Student),
-      token: Token(
-        token: 'token',
-        expiration: DateTime.now().add(_duration),
-      ),
-    );
-    // final response = await _client.post('$NAMESPACE/login', body: {
-    //   'email': username,
-    //   'password': password,
-    // });
-    // final data = response['data'];
-    // final payload = LoginPayload.fromMap(data);
-    // return payload;
-    return data;
+    // await Future.delayed(_duration);
+    // final data = LoginPayload(
+    //   user: User(
+    //       email: 'test@gmail.com',
+    //       firstName: 'Collins',
+    //       lastName: 'Oriakhi',
+    //       role: Role.Student),
+    //   token: Token(
+    //     token: 'token',
+    //     expiration: DateTime.now().add(_duration),
+    //   ),
+    // );
+    final response = await _client.post('$NAMESPACE/login', body: {
+      'email': username,
+      'password': password,
+    });
+    _logger.d(response);
+    final data = response['data'];
+    final payload = LoginPayload.fromMap(data);
+    return payload;
+    // return data;
     // throw UserDefinedExceptions('Invalid Credenials', 'dccdchdchdhcvdjcjkdcbdhcdjcjddnmcb,djbcjdbhcb');
   }
 

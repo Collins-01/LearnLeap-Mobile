@@ -9,15 +9,14 @@ import 'network_client_interceptors.dart';
 
 ProviderContainer cache = ProviderContainer();
 Dio _createDio() {
-  String baseUrl =
-      'http://${Platform.isAndroid ? '10.0.2.2' : 'localhost'}:3000';
+  String baseUrl = 'https://learnleap-v2.onrender.com/api';
   var dio = Dio(
     BaseOptions(
       baseUrl: baseUrl,
-      receiveTimeout: const Duration(seconds: 35), // 15 seconds
-      connectTimeout: const Duration(seconds: 35),
+      receiveTimeout: const Duration(seconds: 40), // 15 seconds
+      connectTimeout: const Duration(seconds: 40),
       sendTimeout: const Duration(seconds: 60),
-      headers: {"Authorization": "Bearer $cache"},
+      // headers: {"Authorization": "Bearer $cache"},
     ),
   );
 

@@ -12,14 +12,24 @@ class UserDomain {
   ValueNotifier<User?> get currentUser => _currentUser;
 
   init() async {
-    await Future.delayed(const Duration(seconds: 1));
-    _currentUser.value = User(
-      email: 'test@gmail.com',
-      firstName: 'Collins',
-      lastName: 'Oriakhi',
-      role: Role.Student,
-    );
+    final userData = await _cache.getUserData();
+    final tokenInfo = await _cache.getToken();
+    _logger.d("User Data:: $userData");
+    _logger.d("Token Info:: ${tokenInfo?.toMap()}");
+    // await Future.delayed(const Duration(seconds: 1));
+    // _currentUser.value = User(
+    //   email: 'test@gmail.com',
+    //   firstName: 'Collins',
+    //   lastName: 'Oriakhi',
+    //   role: Role.Student,
+    // );
+    if (userData != null && tokenInfo != null) {
+      final user = User.fromMap(userData);
+      _logger.d("User ======${user.toMap()}");
+      _logger.d("Current User Info: ${_currentUser.value?.toMap()} ");
+    }
     _logger.d("Current User Info: ${_currentUser.value?.toMap()} ");
+    return;
   }
 
   logOut() async {
