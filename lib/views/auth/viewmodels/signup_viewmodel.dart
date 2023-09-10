@@ -25,7 +25,7 @@ class SignUpViewModel extends BaseViewModel {
           lastName: lastName,
           email: email,
           password: password,
-          role: Role.Tutor.name,
+          role: isTutor ? Role.tutor.name : Role.student.name,
         ),
       );
       changeState(const ViewModelState.idle());

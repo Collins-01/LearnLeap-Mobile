@@ -94,11 +94,11 @@ class LocalCacheImpl implements LocalCache {
   @override
   Future<Map<String, dynamic>?> getUserData() async {
     try {
-      final data = await _localStorage.read(key: _tokenKey);
+      final data = await _localStorage.read(key: _userDataKey);
       if (data == null) {
         return null;
       }
-      // _log.d("User Info From Local Cache ---> $data");
+      _log.d("User Info From Local Cache ---> $data");
       return jsonDecode(data) as Map<String, dynamic>;
     } catch (e) {
       return null;

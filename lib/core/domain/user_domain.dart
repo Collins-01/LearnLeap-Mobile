@@ -25,6 +25,7 @@ class UserDomain {
     // );
     if (userData != null && tokenInfo != null) {
       final user = User.fromMap(userData);
+      _currentUser.value = user;
       _logger.d("User ======${user.toMap()}");
       _logger.d("Current User Info: ${_currentUser.value?.toMap()} ");
     }
@@ -33,8 +34,8 @@ class UserDomain {
   }
 
   logOut() async {
-    _currentUser.value = null;
     await _cache.clearCache();
+    _currentUser.value = null;
   }
 }
 

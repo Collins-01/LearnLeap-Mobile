@@ -2,14 +2,14 @@
 
 enum Role {
   // ignore: constant_identifier_names
-  Student,
+  student,
   // ignore: constant_identifier_names
-  Tutor
+  tutor
 }
 
 extension RoleExtension on Role {
-  bool get isStudent => this == Role.Student;
-  bool get isTutor => this == Role.Tutor;
+  bool get isStudent => this == Role.student;
+  bool get isTutor => this == Role.tutor;
 }
 
 class User {
@@ -66,10 +66,11 @@ class User {
       );
 
   static Role _roleFromMap(String value) {
-    if (value == 'student') {
-      return Role.Student;
-    } else if (value == 'tutor') {
-      return Role.Student;
+    print("Role: $value");
+    if (value == Role.student.name) {
+      return Role.student;
+    } else if (value == Role.tutor.name) {
+      return Role.tutor;
     } else {
       throw UnsupportedError('Role $value not supported');
     }

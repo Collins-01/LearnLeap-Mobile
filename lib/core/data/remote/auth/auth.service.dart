@@ -14,18 +14,6 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<LoginPayload> login(String username, String password) async {
-    // await Future.delayed(_duration);
-    // final data = LoginPayload(
-    //   user: User(
-    //       email: 'test@gmail.com',
-    //       firstName: 'Collins',
-    //       lastName: 'Oriakhi',
-    //       role: Role.Student),
-    //   token: Token(
-    //     token: 'token',
-    //     expiration: DateTime.now().add(_duration),
-    //   ),
-    // );
     final response = await _client.post('$NAMESPACE/login', body: {
       'email': username,
       'password': password,
@@ -34,8 +22,6 @@ class AuthServiceImpl implements AuthService {
     final data = response['data'];
     final payload = LoginPayload.fromMap(data);
     return payload;
-    // return data;
-    // throw UserDefinedExceptions('Invalid Credenials', 'dccdchdchdhcvdjcjkdcbdhcdjcjddnmcb,djbcjdbhcb');
   }
 
   @override
@@ -46,13 +32,11 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<void> signup(CreateAccount dto) async {
-    // final response =
-    //     await _client.post("$NAMESPACE/signup", body: dto.toJson());
-    // _logger.d(
-    //   "Response from SignUp ==> ${response.toString()}",
-    // );
-    _logger.d("Creating account for ${dto.firstName}");
-    await Future.delayed(const Duration(seconds: 3));
+    final response =
+        await _client.post("$NAMESPACE/signup", body: dto.toJson());
+    _logger.d(
+      "Response from SignUp ==> ${response.toString()}",
+    );
   }
 
   @override
