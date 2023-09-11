@@ -14,7 +14,7 @@ abstract class LocalCache {
   Future<void> saveUserData(Map<String, dynamic> json);
 
   ///Retrieves user data
-  Map<String, dynamic>? getUserData();
+  Future<Map<String, dynamic>?> getUserData();
 
   ///Saves `value` to cache using `key`
   Future<void> saveToLocalCache({

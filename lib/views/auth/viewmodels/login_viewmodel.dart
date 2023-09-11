@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learn_leap/core/data/network/network.dart';
+import 'package:learn_leap/core/domain/user_domain.dart';
 import 'package:learn_leap/views/view_states/view_states.dart';
 import 'package:learn_leap/widgets/widgets.dart';
 
@@ -8,7 +9,8 @@ import '../../../core/core.dart';
 
 class LoginViewModel extends BaseViewModel {
   final AuthRepository _authRepository;
-  LoginViewModel(this._authRepository);
+  final UserDomain _userDomain;
+  LoginViewModel(this._authRepository, this._userDomain);
   final NavigationService _navigationService = NavigationService.instance;
 
   login(String email, String password) async {
@@ -16,7 +18,8 @@ class LoginViewModel extends BaseViewModel {
       changeState(const ViewModelState.busy());
       await _authRepository.login(email, password);
       changeState(const ViewModelState.idle());
-      _navigationService.navigateToReplace(NavigatorRoutes.homeView);
+      await _userDomain.init();
+      _navigationService.navigateToReplace(NavigatorRoutes.dashBoardView);
     } on Failure catch (e) {
       changeState(ViewModelState.error(e));
       AppFlushBar.showError(title: e.title, message: e.message);
@@ -39,5 +42,5 @@ class LoginViewModel extends BaseViewModel {
 
 final loginViewModel =
     ChangeNotifierProvider.autoDispose<LoginViewModel>((ref) {
-  return LoginViewModel(ref.read(authRepository));
+  return LoginViewModel(ref.read(authRepository), ref.read(userDomainProvider));
 });

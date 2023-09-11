@@ -6,7 +6,7 @@ import '../core/utils/utils.dart';
 class AppTextField extends StatefulWidget {
   final String title;
   final String hintText;
-  // final Widget prefixIcon;
+  final Widget? prefixIcon;
   final TextEditingController controller;
   final bool isPassword;
   final String? Function(String?)? validator;
@@ -17,7 +17,7 @@ class AppTextField extends StatefulWidget {
   const AppTextField(
       {super.key,
       required this.title,
-      // required this.prefixIcon,
+      this.prefixIcon,
       required this.controller,
       this.inputFormatters = const [],
       this.validator,
@@ -46,16 +46,22 @@ class _AppTextFieldState extends State<AppTextField> {
         // inputFormatters: widget.inputFormatters,
         controller: widget.controller,
         style: mediumStyle,
+
         validator: widget.validator,
         obscureText: (widget.isPassword && obscure),
         decoration: InputDecoration(
           labelText: widget.title,
           // filled: true,
           fillColor: AppColors.textFieldColor,
-          border: const OutlineInputBorder(),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.primaryColor),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(4),
+            ),
+          ),
           hintText: widget.hintText,
           hintStyle: mediumStyle,
-          // prefixIcon: widget.prefixIcon,
+          prefixIcon: widget.prefixIcon,
           suffixIcon: widget.isPassword
               ? IconButton(
                   onPressed: togglePasswordObscure,

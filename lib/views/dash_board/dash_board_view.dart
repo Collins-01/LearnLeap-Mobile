@@ -1,23 +1,35 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learn_leap/core/domain/user_domain.dart';
 import 'package:learn_leap/core/utils/utils.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:learn_leap/models/user_model.dart';
+import 'package:learn_leap/views/downloads/downloads_view.dart';
+import 'package:learn_leap/views/enrollments/enrollments_view.dart';
+import 'package:learn_leap/views/home/student_home_view.dart';
+import 'package:learn_leap/views/home/tutor_home_view.dart';
+import 'package:learn_leap/views/create_course/profile/profile_view.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-import 'home.dart';
-
-class BaseView extends StatelessWidget {
-  BaseView({Key? key}) : super(key: key);
+class DashBoardView extends ConsumerWidget {
+  DashBoardView({Key? key}) : super(key: key);
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    var currentUser = ref.watch(userDomainProvider).currentUser.value;
     return PersistentTabView(
       context,
       controller: _controller,
-      screens: _buildScreens(),
-      items: _navBarsItems(),
+      screens: currentUser!.role.isTutor
+          ? _buildTutorScreens()
+          : _buildStudentScreens(),
+
+      items: currentUser.role.isStudent
+          ? _studentNavBarsItems()
+          : _tutorNavBarsItems(),
       confineInSafeArea: true,
       backgroundColor: Colors.white, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
@@ -44,30 +56,29 @@ class BaseView extends StatelessWidget {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle:
-          NavBarStyle.style1, // Choose the nav bar style with this property.
+          NavBarStyle.style6, // Choose the nav bar style with this property.
     );
   }
 
-  List<Widget> _buildScreens() {
+  _buildTutorScreens() {
+    return [const TutorsHomeView(), const ProfileView()];
+  }
+
+  _buildStudentScreens() {
     return [
-      const HomeView(),
-      const HomeView(),
-      const HomeView(),
+      const StudentHomeView(),
+      const EnrollmentView(),
+      const DownloadsView(),
+      const ProfileView()
     ];
   }
 
-  List<PersistentBottomNavBarItem> _navBarsItems() {
+  List<PersistentBottomNavBarItem> _tutorNavBarsItems() {
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.home),
         title: "Home",
-        activeColorPrimary: CupertinoColors.activeBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.class_outlined),
-        title: "Courses",
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: AppColors.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
@@ -76,7 +87,39 @@ class BaseView extends StatelessWidget {
           value: 0,
         ),
         title: "Profile",
-        activeColorPrimary: CupertinoColors.activeBlue,
+        activeColorPrimary: AppColors.primaryColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+    ];
+  }
+
+  List<PersistentBottomNavBarItem> _studentNavBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.home),
+        title: "Home",
+        activeColorPrimary: AppColors.primaryColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.class_outlined),
+        title: "Courses",
+        activeColorPrimary: AppColors.primaryColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(Icons.download),
+        title: "Donwloads",
+        activeColorPrimary: AppColors.primaryColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const BuildIconWithIndicator(
+          icon: CupertinoIcons.person,
+          value: 0,
+        ),
+        title: "Profile",
+        activeColorPrimary: AppColors.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
     ];

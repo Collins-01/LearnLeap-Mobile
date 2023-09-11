@@ -2,14 +2,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learn_leap/core/data/network/network.dart';
 import 'package:learn_leap/core/data/remote/auth/auth.interface.dart';
 import 'package:learn_leap/models/create_account_model.dart';
-import 'package:learn_leap/models/login_payload.dart';
 import 'package:learn_leap/core/utils/utils.dart';
+import 'package:learn_leap/models/models.dart';
 
 class AuthServiceImpl implements AuthService {
   // ignore: non_constant_identifier_names
   final NAMESPACE = '/authentication';
   final NetworkClient _client = NetworkClient();
   final _logger = appLogger(AuthServiceImpl);
+  final _duration = const Duration(seconds: 2);
 
   @override
   Future<LoginPayload> login(String username, String password) async {
@@ -17,6 +18,7 @@ class AuthServiceImpl implements AuthService {
       'email': username,
       'password': password,
     });
+    _logger.d(response);
     final data = response['data'];
     final payload = LoginPayload.fromMap(data);
     return payload;

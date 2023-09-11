@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:learn_leap/core/router/router_argument_keys.dart';
+import 'package:learn_leap/core/domain/user_domain.dart';
 import 'package:learn_leap/models/create_account_model.dart';
+import 'package:learn_leap/models/user_model.dart';
 import 'package:learn_leap/views/view_states/view_states.dart';
 import 'package:learn_leap/widgets/widgets.dart';
 
@@ -10,24 +11,28 @@ import '../../../core/core.dart';
 
 class SignUpViewModel extends BaseViewModel {
   final AuthRepository _authRepository;
-  SignUpViewModel(this._authRepository);
+  final UserDomain _userDomain;
+  SignUpViewModel(this._authRepository, this._userDomain);
   final NavigationService _navigationService = NavigationService.instance;
 
-  signUp(
-      String email, String password, String firstName, String lastName) async {
+  signUp(String email, String password, String firstName, String lastName,
+      bool isTutor) async {
     try {
       changeState(const ViewModelState.busy());
       await _authRepository.signup(
         CreateAccount(
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password,
-            role: ''),
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+          role: isTutor ? Role.tutor.name : Role.student.name,
+        ),
       );
       changeState(const ViewModelState.idle());
-      _navigationService.navigateToReplace(NavigatorRoutes.otpVerificationView,
-          argument: {RoutingArgumentKey.email: email});
+      _navigationService.navigateToReplace(
+        NavigatorRoutes.loginView,
+        argument: {RoutingArgumentKey.email: email},
+      );
     } on Failure catch (e) {
       changeState(ViewModelState.error(e));
       AppFlushBar.showError(title: e.title, message: e.message);
@@ -52,5 +57,6 @@ final signUpViewModel =
     ChangeNotifierProvider.autoDispose<SignUpViewModel>((ref) {
   return SignUpViewModel(
     ref.read(authRepository),
+    ref.read(userDomainProvider),
   );
 });

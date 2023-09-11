@@ -184,7 +184,10 @@ class AppText extends StatelessWidget {
     this.lineHeight,
     this.fontWeight,
   })  : style = regularStyle.copyWith(
-            color: color, fontSize: fontSize, fontWeight: fontWeight),
+          color: color,
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+        ),
         super(key: key);
 
   /// medium body text

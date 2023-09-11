@@ -41,7 +41,8 @@ class LocalCacheImpl implements LocalCache {
   Future<Token?> getToken() async {
     final value = await _localStorage.read(key: _tokenKey);
     if (value != null) {
-      final token = Token.fromJson(value);
+      final decoded = jsonDecode(value) as Map<String, dynamic>;
+      final token = Token.fromMap(decoded);
       return token;
     }
     return null;
@@ -56,7 +57,7 @@ class LocalCacheImpl implements LocalCache {
 
   @override
   Future<void> saveToken(Token token) async {
-    saveToLocalCache(key: _tokenKey, value: token.toJson());
+    saveToLocalCache(key: _tokenKey, value: token.toMap());
   }
 
   @override
@@ -87,13 +88,17 @@ class LocalCacheImpl implements LocalCache {
 
   @override
   Future<void> clearCache() async {
-    // await _sharedPreferences.clear();
+    await _localStorage.deleteAll();
   }
 
   @override
-  Map<String, dynamic>? getUserData() {
+  Future<Map<String, dynamic>?> getUserData() async {
     try {
-      final data = getFromLocalCache(_userDataKey) as String;
+      final data = await _localStorage.read(key: _userDataKey);
+      if (data == null) {
+        return null;
+      }
+      _log.d("User Info From Local Cache ---> $data");
       return jsonDecode(data) as Map<String, dynamic>;
     } catch (e) {
       return null;
